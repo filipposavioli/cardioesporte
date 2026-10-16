@@ -25,7 +25,7 @@ PLAN = [
 ]
 ALT = {"MED": "CLOSE"}   # alternância nos jump cuts
 # pausas inseridas (tela de capítulo): corta no tempo-fonte indicado e insere a pausa
-GAPS = {113.6: 1.6, 148.1: 1.6}
+GAPS = {113.6: 0.3, 148.1: 0.6}
 
 
 def words():

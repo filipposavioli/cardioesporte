@@ -14,7 +14,7 @@ Rodar todos os passos na pasta de trabalho onde estão `raw.mov`, `simbolo.png` 
 | 7 | `compose.py` | Sobrepõe os gráficos, trata o áudio (passa-alta, redução de ruído, compressor, −14 LUFS), adiciona `endcard.html` → MP4 final |
 
 Correção de cor em `grade.txt` (aplicada em `base.py`): menos amarelo na parede, pele mais neutra, vinheta leve.
-`GAPS` em `edl.py` insere pausas de 1,6 s nas telas de capítulo.
+`GAPS` em `edl.py` insere uma pausa curta para a tela de capítulo ficar ~2 s no ar (preferência do Dr. Filippo).
 Preferência do Dr. Filippo: diagramas em painel lateral com ele em cena, sem tela cheia com círculo (PiP).
 
 Enquadramentos: o crop `LEFT` deixa o médico em ~36% da largura, liberando a direita para painéis;
