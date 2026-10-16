@@ -1,0 +1,23 @@
+<!doctype html><html><head><meta charset="utf-8"><style>
+:root { --verde:#9FC742; --petroleo:#021B3A; --cinza:#BDBEC0; --ease:cubic-bezier(.2,.8,.2,1); }
+* { margin:0; padding:0; box-sizing:border-box; animation-fill-mode:both !important; }
+body { width:1920px; height:1080px; overflow:hidden; font-family:'Inter Display','Inter',sans-serif; color:#fff;
+       background:radial-gradient(ellipse 70% 70% at 50% 50%, #06284a 0%, var(--petroleo) 60%, #000 100%);
+       display:flex; flex-direction:column; align-items:center; justify-content:center; }
+.grid { position:absolute; inset:0; opacity:.08; background-image:linear-gradient(#fff 1px,transparent 1px),linear-gradient(90deg,#fff 1px,transparent 1px); background-size:64px 64px; }
+.sig { display:flex; align-items:center; gap:28px; position:relative; }
+.sym { height:150px; animation:pop .6s cubic-bezier(.3,1.5,.5,1) .2s; }
+.wm { height:110px; clip-path:inset(0 100% 0 0); animation:reveal .7s var(--ease) .5s; }
+.tag { margin-top:44px; font-size:40px; font-weight:600; position:relative; animation:up .6s var(--ease) 1.0s; }
+.tag b { color:var(--verde); font-weight:800; }
+.cta { margin-top:56px; font-size:28px; font-weight:800; letter-spacing:4px; text-transform:uppercase; color:var(--petroleo);
+       background:var(--verde); border-radius:999px; padding:14px 34px; position:relative; animation:up .6s var(--ease) 1.5s; }
+@keyframes pop { from { opacity:0; transform:scale(.3) } to { opacity:1; transform:scale(1) } }
+@keyframes reveal { to { clip-path:inset(0 0 0 0) } }
+@keyframes up { from { opacity:0; transform:translateY(20px) } to { opacity:1; transform:none } }
+</style></head><body>
+<div class="grid"></div>
+<div class="sig"><img class="sym" src="simbolo.png"><img class="wm" src="wordmark.png"></div>
+<div class="tag">Seu corpo tem dados. <b>Nós interpretamos.</b></div>
+<div class="cta">Inscreva-se no canal</div>
+</body></html>
