@@ -20,10 +20,12 @@ PLAN = [
     (9.5, 19.6, "MED"), (19.6, 28.3, "CLOSE"), (28.3, 43.4, "MED"),
     (43.4, 54.6, "WIDE"), (54.6, 95.5, "LEFT"), (95.5, 108.9, "CLOSE"),
     (108.9, 114.0, "MED"), (114.0, 146.9, "LEFT"), (146.9, 159.0, "MED"),
-    (159.0, 180.3, "LEFT"), (180.3, 193.5, "CLOSE"), (193.5, 219.2, "PIP"),
+    (159.0, 180.3, "LEFT"), (180.3, 193.5, "CLOSE"), (193.5, 219.2, "LEFT"),
     (219.2, 230.4, "LEFT"), (230.4, 232.2, "MED"), (232.2, 240.0, "CLOSE"),
 ]
 ALT = {"MED": "CLOSE"}   # alternância nos jump cuts
+# pausas inseridas (tela de capítulo): corta no tempo-fonte indicado e insere a pausa
+GAPS = {113.6: 1.6, 148.1: 1.6}
 
 
 def words():
@@ -71,6 +73,12 @@ def clips():
             elif f in ALT and x == a:     # jump cut dentro do mesmo bloco
                 alt = not alt
             res.append({"src": x, "dur": y - x, "frame": ALT[f] if (alt and f in ALT) else f})
+    for g, d in GAPS.items():
+        i = next(k for k, c in enumerate(res) if c["src"] is not None and c["src"] <= g < c["src"] + c["dur"])
+        c = res[i]
+        tail = {"src": g, "dur": c["src"] + c["dur"] - g, "frame": plan_at(g)[0]}
+        c["dur"] = g - c["src"]
+        res[i + 1:i + 1] = [{"src": None, "dur": d, "frame": "GAP"}, tail]
     for c in res:
         c["dur"] = round(c["dur"] * 30) / 30
     t = 0.0
@@ -83,16 +91,19 @@ def clips():
 def to_out(src, cl):
     """Converte tempo-fonte em tempo-saída (usa o clipe que contém ou o próximo)."""
     for c in cl:
+        if c["src"] is None:
+            continue
         if src < c["src"]:
             return c["out"]
         if src < c["src"] + c["dur"]:
             return c["out"] + (src - c["src"])
-    return cl[-1]["out"] + cl[-1]["dur"]
+    last = [c for c in cl if c["src"] is not None][-1]
+    return last["out"] + last["dur"]
 
 
 if __name__ == "__main__":
     cl = clips()
     for c in cl:
-        print(f'{c["out"]:7.2f}  src {c["src"]:7.2f} +{c["dur"]:5.2f}  {c["frame"]}')
+        print(f'{c["out"]:7.2f}  src {c["src"] or 0:7.2f} +{c["dur"]:5.2f}  {c["frame"]}')
     print("total", round(cl[-1]["out"] + cl[-1]["dur"], 2), "clips", len(cl))
     json.dump(cl, open("clips.json", "w"), indent=1)

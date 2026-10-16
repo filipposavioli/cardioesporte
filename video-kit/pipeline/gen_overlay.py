@@ -140,29 +140,17 @@ html, body {{ width:1920px; height:1080px; overflow:hidden; background:transpare
 #fatmax .a {{ font-size:40px; font-weight:800; text-transform:uppercase; text-shadow:0 2px 20px rgba(0,0,0,.6); animation:up .5s var(--ease) {s('fatmax')}s; }}
 #fatmax .box {{ font-size:70px; margin-top:10px; animation:pop .6s var(--pop) {T(184.2)}s; }}
 
-/* mitocôndria (tela cheia com PiP) */
-#mitoc {{ animation:in .25s linear {s('mitoc')}s, out .25s linear {e('mitoc')-0.25}s; }}
-#mitoc .bg {{ position:absolute; inset:0; background:radial-gradient(ellipse 80% 80% at 60% 55%, #06284a 0%, #000 100%);
-   -webkit-mask:radial-gradient(circle 250px at 310px 280px, transparent 249px, #000 251px); }}
-#mitoc .grid {{ position:absolute; inset:0; opacity:.08; background-image:linear-gradient(#fff 1px,transparent 1px),linear-gradient(90deg,#fff 1px,transparent 1px); background-size:64px 64px;
-   -webkit-mask:radial-gradient(circle 250px at 310px 280px, transparent 249px, #000 251px); }}
-#mitoc .ring {{ position:absolute; left:54px; top:24px; width:512px; height:512px; border-radius:50%; border:6px solid var(--verde); box-shadow:0 0 40px rgba(159,199,66,.5); }}
-#mitoc .title {{ position:absolute; left:660px; top:90px; font-size:30px; font-weight:800; letter-spacing:3px; text-transform:uppercase; color:var(--verde); animation:up .5s var(--ease) {s('mitoc')+0.2}s; }}
-#mitoc .steps {{ position:absolute; left:660px; top:150px; width:1160px; }}
-.step {{ display:flex; gap:34px; align-items:center; margin-bottom:46px; }}
-.step svg {{ flex:none; width:230px; height:150px; }}
-.step p {{ font-size:46px; font-weight:800; line-height:1.12; letter-spacing:-.5px; }}
-.step p span {{ color:var(--verde); }}
-#st1 {{ animation:left .6s var(--ease) {T(193.7)}s; }}
-#st2 {{ animation:left .6s var(--ease) {T(201.6)}s; }}
-#st3 {{ animation:left .6s var(--ease) {T(212.4)}s; }}
-#st3 p {{ background:var(--verde); color:var(--petroleo); border-radius:10px; padding:10px 22px; }}
-#st3 p span {{ color:var(--petroleo); text-decoration:underline; }}
-.mito path, .mito ellipse {{ fill:none; stroke:var(--verde); stroke-width:6; stroke-linecap:round; stroke-linejoin:round; }}
-.mito ellipse.f {{ fill:rgba(159,199,66,.15); }}
-.fib rect {{ fill:rgba(255,255,255,.06); stroke:#fff; stroke-width:4; }}
-.fib line {{ stroke:rgba(255,255,255,.25); stroke-width:3; }}
-.fib ellipse {{ fill:var(--verde); }}
+/* mitocôndria (painel lateral) */
+#mitoc {{ animation:out .4s ease {e('mitoc')-0.4}s; }}
+#mitoc .panel {{ top:150px; width:760px; animation:right .7s var(--ease) {s('mitoc')}s; }}
+#mitoc .li {{ font-size:34px; margin-top:26px; }}
+#mitoc .li span {{ color:var(--verde); }}
+#mitoc .li:nth-child(2) {{ animation:up .5s var(--ease) {T(193.7)}s; }}
+#mitoc .li:nth-child(3) {{ animation:up .5s var(--ease) {T(201.6)}s; }}
+#mitoc .li:nth-child(4) {{ animation:up .5s var(--ease) {T(212.4)}s; }}
+#mitoc .li.hl {{ background:var(--verde); color:var(--petroleo); border-radius:14px; padding:14px 18px; margin-left:-18px; margin-right:-18px; }}
+#mitoc .li.hl b {{ background:var(--petroleo); color:var(--verde); }}
+#mitoc .li.hl span {{ color:var(--petroleo); text-decoration:underline; }}
 
 /* melhora */
 #melhora {{ animation:out .4s ease {e('melhora')-0.4}s; }}
@@ -239,26 +227,12 @@ html, body {{ width:1920px; height:1080px; overflow:hidden; background:transpare
   <div class="box">Taxa máxima de queima de gordura</div>
 </div></section>
 
-<section class="g" id="mitoc"><div class="bg"></div><div class="grid"></div><div class="ring"></div>
-  <div class="title">Por que a zona 2 é tão importante</div>
-  <div class="steps">
-    <div class="step" id="st1">
-      <svg class="mito" viewBox="0 0 230 150"><ellipse class="f" cx="115" cy="75" rx="105" ry="62"/>
-        <path d="M30 75 C45 35, 60 115, 75 75 S105 35, 115 75 S145 115, 155 75 S185 35, 200 75"/></svg>
-      <p>A gordura só é queimada dentro da <span>mitocôndria</span>, a usina de energia da célula</p>
-    </div>
-    <div class="step" id="st2">
-      <svg class="fib" viewBox="0 0 230 150"><rect x="10" y="30" width="210" height="90" rx="45"/>
-        <line x1="40" y1="30" x2="40" y2="120"/><line x1="80" y1="30" x2="80" y2="120"/><line x1="120" y1="30" x2="120" y2="120"/><line x1="160" y1="30" x2="160" y2="120"/><line x1="195" y1="35" x2="195" y2="115"/>
-        <ellipse cx="60" cy="58" rx="12" ry="7"/><ellipse cx="100" cy="92" rx="12" ry="7"/><ellipse cx="140" cy="60" rx="12" ry="7"/><ellipse cx="178" cy="90" rx="12" ry="7"/><ellipse cx="60" cy="95" rx="12" ry="7"/><ellipse cx="140" cy="96" rx="12" ry="7"/></svg>
-      <p>Fibras de <span>contração lenta</span>, as mais recrutadas na zona 2, são as que têm mais mitocôndrias</p>
-    </div>
-    <div class="step" id="st3">
-      <svg class="mito" viewBox="0 0 230 150"><path d="M30 120 L90 60 L130 95 L200 25"/><path d="M160 25 L200 25 L200 65"/></svg>
-      <p>Treinar zona 2 = treinar sua <span>capacidade mitocondrial</span></p>
-    </div>
-  </div>
-</section>
+<section class="g" id="mitoc"><div class="panel">
+  <div class="tag"><i></i>Por que a zona 2 é tão importante</div>
+  <div class="li"><b>1</b><div>A gordura só é queimada dentro da <span>mitocôndria</span>, a usina de energia da célula</div></div>
+  <div class="li"><b>2</b><div>Fibras de <span>contração lenta</span>, as mais recrutadas na zona 2, têm mais mitocôndrias</div></div>
+  <div class="li hl"><b>3</b><div>Treinar zona 2 = treinar sua <span>capacidade mitocondrial</span></div></div>
+</div></section>
 
 <section class="g" id="melhora"><div class="panel">
   <div class="tag"><i></i>Na zona 2 você melhora</div>

@@ -1,6 +1,6 @@
 import json, subprocess
 iv=json.load(open('intervals.json'))
-D=207.6667
+cl=json.load(open("clips.json")); D=round(cl[-1]["out"]+cl[-1]["dur"],4)
 args=['ffmpeg','-loglevel','error','-y','-i','base.mov']
 fc=[]; last='0:v'
 for k,(n,(a,b)) in enumerate(iv.items(),1):
