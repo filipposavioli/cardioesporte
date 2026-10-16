@@ -1,0 +1,57 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<style>
+  :root { --verde:#9FC742; --azul:#006C92; --cinza:#BDBEC0; --grafite:#1C1D21; --petroleo:#021B3A; --branco:#FFFFFF; }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { width:1280px; height:720px; overflow:hidden; background:var(--petroleo);
+         font-family:'Inter Display','Inter',sans-serif; }
+  .bg { position:absolute; inset:0;
+        background:
+          radial-gradient(ellipse 60% 80% at 78% 40%, #0b3a5c 0%, transparent 70%),
+          radial-gradient(ellipse 90% 90% at 20% 60%, #06213f 0%, #000 100%); }
+  .grid { position:absolute; inset:0; opacity:.12;
+          background-image:linear-gradient(#fff 1px,transparent 1px),linear-gradient(90deg,#fff 1px,transparent 1px);
+          background-size:48px 48px;
+          -webkit-mask-image:radial-gradient(ellipse 50% 60% at 25% 65%, #000 0%, transparent 75%); }
+  .glow { position:absolute; width:620px; height:620px; right:40px; top:40px; border-radius:50%;
+          background:radial-gradient(circle, rgba(159,199,66,.45) 0%, rgba(159,199,66,0) 65%); filter:blur(10px); }
+  .foto { position:absolute; right:-10px; top:-30px; height:1010px;
+          filter:contrast(1.08) saturate(.9);
+          -webkit-mask-image:linear-gradient(90deg, transparent 0%, #000 22%, #000 100%),
+                             linear-gradient(0deg, transparent 0%, #000 18%);
+          -webkit-mask-composite: source-in; mask-composite: intersect; }
+  .vig { position:absolute; inset:0; pointer-events:none;
+         background:radial-gradient(ellipse 32% 62% at 70% 42%, rgba(2,27,58,0) 0%, rgba(2,27,58,.55) 60%, rgba(0,0,0,.92) 100%);
+         mix-blend-mode:multiply; }
+  .vig::after { content:""; position:absolute; inset:0;
+         background:radial-gradient(ellipse 40% 50% at 72% 30%, rgba(159,199,66,.18), transparent 70%); mix-blend-mode:screen; }
+  .ecg { position:absolute; left:0; top:430px; width:1280px; height:200px; }
+  .ecg path { fill:none; stroke:var(--verde); stroke-width:6; stroke-linejoin:round; stroke-linecap:round;
+              filter:drop-shadow(0 0 10px rgba(159,199,66,.9)) drop-shadow(0 0 28px rgba(159,199,66,.6)); }
+  .txt { position:absolute; left:56px; top:70px; width:700px; }
+  .box { display:inline-block; background:var(--verde); color:var(--petroleo); font-weight:900;
+         font-size:96px; line-height:1; padding:8px 26px 14px; border-radius:6px; letter-spacing:-1px; }
+  .box sub { font-size:.5em; vertical-align:-0.05em; }
+  h1 { color:#fff; font-weight:900; font-size:78px; line-height:.98; margin-top:18px;
+       letter-spacing:-1.5px; text-transform:uppercase; text-shadow:0 4px 30px rgba(0,0,0,.6); }
+  .chip { position:absolute; left:56px; bottom:52px; display:flex; align-items:center; gap:14px;
+          background:rgba(2,27,58,.75); border:2px solid rgba(255,255,255,.18); border-radius:14px;
+          padding:12px 20px; color:#fff; }
+  .chip b { font-size:40px; font-weight:900; color:var(--verde); }
+  .chip span { font-size:18px; font-weight:600; opacity:.85; line-height:1.15; }
+  .logo { position:absolute; right:36px; bottom:30px; height:34px; }
+</style></head>
+<body>
+  <div class="bg"></div><div class="grid"></div><div class="glow"></div>
+  <img class="foto" src="../assets/foto.jpg">
+  <div class="vig"></div>
+  <svg class="ecg" viewBox="0 0 1280 200">
+    <path d="M0 120 L250 120 L280 120 L300 95 L320 120 L350 120 L372 150 L400 10 L428 185 L452 120 L500 120 L530 100 L565 120 L760 120"/>
+  </svg>
+  <div class="txt">
+    <div class="box">VO<sub>2</sub> MÁX</div>
+    <h1>O exame que<br>prevê sua<br>longevidade</h1>
+  </div>
+  <div class="chip"><b>5×</b><span>mais risco de morte<br>com condicionamento baixo</span></div>
+  <img class="logo" src="../assets/logo_verde_branco.png">
+</body></html>

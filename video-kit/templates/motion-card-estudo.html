@@ -1,0 +1,131 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<style>
+  :root { --verde:#9FC742; --azul:#006C92; --cinza:#BDBEC0; --grafite:#1C1D21; --petroleo:#021B3A; --preto:#000000; --ease:cubic-bezier(.2,.8,.2,1); }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { width:1920px; height:1080px; overflow:hidden; background:var(--preto);
+         font-family:'Inter Display','Inter',sans-serif; color:#fff; }
+  .scene { position:absolute; inset:0; overflow:hidden; }
+  * { animation-fill-mode:both !important; }
+
+  /* ---------- CENA A: A-roll + lower third + card de estudo ---------- */
+  #A { animation:sceneOut .01s linear 6.2s; }
+  .aroll { position:absolute; inset:0; background:#2b2b2e; }
+  .aroll img { position:absolute; left:120px; top:-40px; height:1250px; transform-origin:40% 30%;
+               animation:kenburns 6.2s linear 0s;
+               -webkit-mask-image:linear-gradient(90deg, transparent 0%, #000 12%, #000 75%, transparent 100%); }
+  .aroll::after { content:""; position:absolute; inset:0;
+       background:radial-gradient(ellipse 30% 65% at 28% 40%, rgba(2,27,58,0), rgba(2,27,58,.5) 60%, rgba(0,0,0,.9) 100%); }
+  @keyframes kenburns { from { transform:scale(1); } to { transform:scale(1.07); } }
+
+  .lt { position:absolute; left:96px; bottom:110px; display:flex; align-items:stretch; }
+  .lt .bar { width:10px; background:var(--verde); border-radius:3px;
+             animation:barIn .5s var(--ease) .4s, fadeOut .4s ease 3.6s; }
+  .lt .body { margin-left:18px; overflow:hidden; }
+  .lt .nome { font-size:52px; font-weight:900; letter-spacing:-1px; line-height:1.05;
+              animation:slideUp .6s var(--ease) .55s, fadeOut .4s ease 3.6s; }
+  .lt .cargo { font-size:28px; font-weight:600; opacity:.85; margin-top:4px;
+               animation:slideUp .6s var(--ease) .7s, fadeOut .4s ease 3.6s; }
+  .lt .cargo b { color:var(--verde); }
+  @keyframes barIn { from { transform:scaleY(0); } to { transform:scaleY(1); } }
+  @keyframes slideUp { from { transform:translateY(110%); opacity:0; } to { transform:none; opacity:1; } }
+  @keyframes fadeOut { to { opacity:0; transform:translateY(-10px); } }
+
+  .card { position:absolute; right:96px; top:190px; width:760px; padding:44px 48px 48px;
+          background:rgba(2,27,58,.92); border:2px solid rgba(255,255,255,.12); border-radius:22px;
+          box-shadow:0 30px 80px rgba(0,0,0,.6);
+          animation:cardIn .8s var(--ease) 1.2s, cardOut .5s cubic-bezier(.6,0,.8,.2) 5.6s; }
+  .card .tag { display:inline-flex; gap:12px; align-items:center; font-size:22px; font-weight:700;
+               letter-spacing:2px; text-transform:uppercase; color:var(--verde); }
+  .card .tag i { width:12px; height:12px; border-radius:50%; background:var(--verde); display:block; }
+  .card h3 { font-size:40px; line-height:1.15; font-weight:800; margin:20px 0 26px; letter-spacing:-.5px; }
+  .card .meta { display:flex; gap:16px; margin-bottom:30px; }
+  .card .meta span { font-size:22px; font-weight:600; padding:8px 16px; border-radius:999px;
+                     background:rgba(255,255,255,.08); }
+  .card .meta span, .card h3, .card .tag { animation:fadeUp .5s var(--ease) 1.6s; }
+  .card .meta span:nth-child(2) { animation-delay:1.75s; }
+  .hl { position:relative; font-size:36px; line-height:1.3; font-weight:700; }
+  .hl em { font-style:normal; position:relative; z-index:1; animation:toDark .35s ease 2.85s; }
+  @keyframes toDark { from { color:#fff; } to { color:var(--petroleo); } }
+  .hl .mark { position:absolute; left:-8px; right:-8px; top:2px; bottom:2px; background:var(--verde);
+              border-radius:6px; transform-origin:left; z-index:0; animation:mark .7s var(--ease) 2.6s; }
+  .hl { animation:fadeUp .5s var(--ease) 2.1s; }
+  .fonte { font-size:18px; opacity:.55; margin-top:26px; animation:fadeUp .5s var(--ease) 2.3s; }
+  @keyframes cardIn { from { transform:translateX(120%) rotate(4deg); } to { transform:none; } }
+  @keyframes cardOut { to { transform:translateX(130%); } }
+  @keyframes fadeUp { from { opacity:0; transform:translateY(20px); } to { opacity:1; transform:none; } }
+  @keyframes mark { from { transform:scaleX(0); } to { transform:scaleX(1); } }
+  @keyframes sceneOut { to { opacity:0; } }
+
+  /* ---------- CENA B: número grande (kinetic) ---------- */
+  #B { opacity:0; animation:sceneIn .01s linear 6.2s, sceneOut .01s linear 8.6s;
+       background:radial-gradient(ellipse 70% 70% at 50% 50%, #06284a 0%, var(--preto) 100%); }
+  .gridB { position:absolute; inset:0; opacity:.10;
+           background-image:linear-gradient(#fff 1px,transparent 1px),linear-gradient(90deg,#fff 1px,transparent 1px);
+           background-size:64px 64px; animation:gridMove 2.4s linear 6.2s; }
+  @keyframes gridMove { from { background-position:0 0; } to { background-position:-64px 0; } }
+  .big { position:absolute; left:0; right:0; top:200px; text-align:center; }
+  .big .n { font-size:360px; font-weight:900; line-height:1; color:var(--verde); letter-spacing:-10px;
+            text-shadow:0 0 60px rgba(159,199,66,.5); animation:pop .7s cubic-bezier(.3,1.6,.5,1) 6.35s; }
+  .big .t { font-size:84px; font-weight:900; text-transform:uppercase; letter-spacing:-1px; margin-top:6px;
+            animation:fadeUp .5s var(--ease) 6.75s; }
+  .big .s { font-size:30px; font-weight:600; opacity:.7; margin-top:12px; animation:fadeUp .5s var(--ease) 6.95s; }
+  .ecgB { position:absolute; left:0; bottom:90px; width:1920px; height:180px; }
+  .ecgB path { fill:none; stroke:var(--verde); stroke-width:6; stroke-linejoin:round; stroke-linecap:round;
+               stroke-dasharray:2600; filter:drop-shadow(0 0 12px rgba(159,199,66,.9));
+               animation:draw 1.8s ease-out 6.4s; }
+  @keyframes draw { from { stroke-dashoffset:2600; } to { stroke-dashoffset:0; } }
+  @keyframes pop { from { transform:scale(.3); opacity:0; } to { transform:scale(1); opacity:1; } }
+  @keyframes sceneIn { from { opacity:0; } to { opacity:1; } }
+
+  /* ---------- CENA C: assinatura ---------- */
+  #C { opacity:0; animation:sceneIn .01s linear 8.6s; background:var(--petroleo);
+       display:flex; flex-direction:column; align-items:center; justify-content:center; }
+  .sig { display:flex; align-items:center; gap:28px; }
+  .sig .sym { height:150px; animation:pop .6s cubic-bezier(.3,1.5,.5,1) 8.7s; }
+  .sig .wm { height:110px; clip-path:inset(0 100% 0 0); animation:reveal .7s var(--ease) 8.95s; }
+  .sig .wmwrap { overflow:hidden; }
+  .tagline { margin-top:44px; font-size:38px; font-weight:600; opacity:0; letter-spacing:-.3px;
+             animation:fadeUp .6s var(--ease) 9.3s; }
+  .tagline b { color:var(--verde); font-weight:800; }
+  @keyframes reveal { to { clip-path:inset(0 0 0 0); } }
+</style></head>
+<body>
+  <section class="scene" id="A">
+    <div class="aroll"><img src="../assets/foto.jpg"></div>
+    <div class="lt">
+      <div class="bar"></div>
+      <div class="body">
+        <div class="nome">Dr. Filippo Savioli</div>
+        <div class="cargo">Cardiologia do Esporte · <b>CRM-SP 151.154</b></div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="tag"><i></i>Estudo · JAMA Netw Open 2018</div>
+      <h3>Aptidão cardiorrespiratória e mortalidade a longo prazo</h3>
+      <div class="meta"><span>122.007 pacientes</span><span>Teste em esteira</span></div>
+      <div class="hl"><span class="mark"></span><em>Baixa aptidão: risco de morte até 5× maior do que no grupo de elite</em></div>
+      <div class="fonte">Mandsager K. et al. JAMA Netw Open. 2018;1(6):e183605</div>
+    </div>
+  </section>
+
+  <section class="scene" id="B">
+    <div class="gridB"></div>
+    <div class="big">
+      <div class="n">5×</div>
+      <div class="t">mais risco de morte</div>
+      <div class="s">baixa aptidão cardiorrespiratória vs. elite</div>
+    </div>
+    <svg class="ecgB" viewBox="0 0 1920 180">
+      <path d="M0 110 L600 110 L640 85 L670 110 L720 110 L750 140 L790 8 L830 172 L862 110 L930 110 L970 88 L1010 110 L1920 110"/>
+    </svg>
+  </section>
+
+  <section class="scene" id="C">
+    <div class="sig">
+      <img class="sym" src="../assets/simbolo.png">
+      <div class="wmwrap"><img class="wm" src="../assets/wordmark.png"></div>
+    </div>
+    <div class="tagline">Seu corpo tem dados. <b>Nós interpretamos.</b></div>
+  </section>
+</body></html>
