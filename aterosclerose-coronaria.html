@@ -1,0 +1,498 @@
+<title>Aterosclerose Coronária</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=Source+Sans+3:wght@400;600&display=swap">
+<style>
+/* Layout: etapas em linha no topo; corte transversal da artéria ao lado do texto; detalhe da parede em largura total. */
+:root {
+  --bg: #f3f5f8;
+  --surface: #ffffff;
+  --fg: #1a2230;
+  --muted: #566176;
+  --line: #d8dde6;
+  --accent: #b81f3a;
+  --accent-ink: #ffffff;
+  --blood: #c0303f;
+  --blood-soft: #f7dcdf;
+  --adv: #d9cfc0;
+  --media: #c98f8b;
+  --intima: #efd2c9;
+  --endo: #e7959d;
+  --fibrous: #efe7d3;
+  --lipid: #e2b13a;
+  --clot: #6b1422;
+  --warn: #cf6d0a;
+  --ldl: #f0b429;
+  --ldl-ox: #8a4b08;
+  --mono: #7b8fd4;
+  --font-display: "Bricolage Grotesque", "Helvetica Neue", Arial, sans-serif;
+  --font-body: "Source Sans 3", "Segoe UI", system-ui, sans-serif;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #11151c; --surface: #1a202a; --fg: #e8ecf2; --muted: #9ba6b8; --line: #2b3342;
+    --accent: #ff6b83; --accent-ink: #1a0a0e; --blood: #a82839; --blood-soft: #3a1c25;
+    --adv: #4b4339; --media: #70403f; --intima: #5c3b3a; --endo: #c76a74; --fibrous: #b8ad8a;
+    --lipid: #d8a62a; --clot: #3b0b15; --warn: #f2a33a; --ldl: #e0a82a; --ldl-ox: #c97a1e; --mono: #8fa2e8;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #11151c; --surface: #1a202a; --fg: #e8ecf2; --muted: #9ba6b8; --line: #2b3342;
+  --accent: #ff6b83; --accent-ink: #1a0a0e; --blood: #a82839; --blood-soft: #3a1c25;
+  --adv: #4b4339; --media: #70403f; --intima: #5c3b3a; --endo: #c76a74; --fibrous: #b8ad8a;
+  --lipid: #d8a62a; --clot: #3b0b15; --warn: #f2a33a; --ldl: #e0a82a; --ldl-ox: #c97a1e; --mono: #8fa2e8;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body {
+  background: var(--bg); color: var(--fg); font-family: var(--font-body); font-size: 16px; line-height: 1.55;
+  padding-block: 28px 48px;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+}
+.wrap { max-width: 1080px; margin: 0 auto; display: flex; flex-direction: column; gap: 22px; }
+h1, h2, h3 { font-family: var(--font-display); text-wrap: balance; margin: 0; line-height: 1.15; }
+h1 { font-size: clamp(28px, 5vw, 42px); font-weight: 700; letter-spacing: -0.02em; }
+.sub { color: var(--muted); max-width: 62ch; margin: 8px 0 0; }
+.eyebrow { font-size: 12px; text-transform: uppercase; letter-spacing: 0.12em; color: var(--accent); font-weight: 600; }
+
+/* stepper */
+.steps { display: flex; gap: 8px; overflow-x: auto; padding-bottom: 6px; }
+.step {
+  flex: 1 0 128px; text-align: left; font: inherit; color: var(--fg); background: var(--surface);
+  border: 1px solid var(--line); border-radius: 8px; padding: 10px 12px; cursor: pointer; min-width: 0;
+}
+.step b { display: block; font-family: var(--font-display); font-size: 13px; color: var(--muted); font-variant-numeric: tabular-nums; }
+.step span { display: block; font-size: 14px; font-weight: 600; line-height: 1.25; margin-top: 2px; }
+.step:hover { border-color: var(--muted); }
+.step[aria-current="step"] { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); }
+.step[aria-current="step"] b { color: inherit; opacity: 0.8; }
+.step.done b { color: var(--accent); }
+button:focus-visible, .chip:focus-visible, input:focus-visible { outline: 3px solid var(--warn); outline-offset: 2px; }
+
+/* main */
+.main { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 22px; align-items: start; }
+.card { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 18px; min-width: 0; }
+figure { margin: 0; }
+figcaption { font-size: 14px; color: var(--muted); margin-top: 10px; }
+svg { display: block; max-width: 100%; height: auto; width: 100%; }
+svg text { font-family: var(--font-body); fill: currentColor; }
+.ann { font-size: 12.5px; paint-order: stroke; stroke: var(--surface); stroke-width: 3px; stroke-linejoin: round; font-weight: 600; }
+.band { font-size: 10.5px; letter-spacing: 0.1em; fill: var(--muted); opacity: 0.9; font-weight: 600; }
+.fade { animation: fadein 0.5s ease both; }
+@keyframes fadein { from { opacity: 0; } to { opacity: 1; } }
+
+.panel { display: flex; flex-direction: column; gap: 14px; }
+.panel h2 { font-size: clamp(22px, 3.2vw, 28px); }
+.time { font-size: 13px; color: var(--muted); font-variant-numeric: tabular-nums; }
+.lede { margin: 0; font-size: 17px; }
+.panel ul { margin: 0; padding-left: 20px; display: flex; flex-direction: column; gap: 6px; }
+.clinic { border-left: 3px solid var(--accent); padding: 2px 0 2px 12px; margin: 0; }
+.clinic b { display: block; font-size: 12px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--accent); }
+.nav { display: flex; gap: 8px; }
+.btn { font: inherit; font-weight: 600; padding: 9px 16px; border-radius: 8px; border: 1px solid var(--line); background: var(--surface); color: var(--fg); cursor: pointer; }
+.btn.primary { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); }
+.btn:disabled { opacity: 0.4; cursor: default; }
+
+/* gauge */
+.gauge-head { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; font-size: 14px; color: var(--muted); }
+.gauge-head output { font-family: var(--font-display); font-size: 26px; font-weight: 700; color: var(--fg); font-variant-numeric: tabular-nums; }
+.gauge { position: relative; height: 12px; background: var(--line); border-radius: 6px; margin-top: 6px; overflow: visible; }
+.gauge i { position: absolute; inset: 0 auto 0 0; background: var(--accent); border-radius: 6px; width: 0; }
+.gauge u { position: absolute; top: -5px; bottom: -5px; width: 2px; background: var(--fg); left: 70%; text-decoration: none; }
+.gauge-note { display: flex; justify-content: space-between; font-size: 12px; color: var(--muted); margin-top: 8px; gap: 12px; }
+.gauge-note span:last-child { text-align: right; }
+
+/* risk */
+.risk { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+.chip { font: inherit; font-size: 14px; padding: 6px 12px; border-radius: 999px; border: 1px solid var(--line); background: var(--bg); color: var(--fg); cursor: pointer; }
+.chip[aria-pressed="true"] { background: var(--fg); color: var(--bg); border-color: var(--fg); }
+.chip.protect { border-style: dashed; }
+.risk-out { margin: 12px 0 0; min-height: 3.2em; }
+.foot { font-size: 13px; color: var(--muted); max-width: 80ch; }
+
+@media (max-width: 760px) { .main { grid-template-columns: minmax(0, 1fr); } }
+@media (prefers-reduced-motion: reduce) { .fade { animation: none; } }
+</style>
+
+<div class="wrap">
+  <header>
+    <div class="eyebrow">Fisiopatologia · Cardiologia</div>
+    <h1>Como a aterosclerose obstrui uma coronária</h1>
+    <p class="sub">Sete etapas, da parede arterial saudável ao infarto. Clique nas etapas, use as setas do teclado ou o botão Próxima. Os dois desenhos mudam juntos.</p>
+  </header>
+
+  <nav class="steps" id="steps" aria-label="Etapas da aterosclerose"></nav>
+
+  <section class="main">
+    <div class="card">
+      <figure>
+        <svg id="cross" viewBox="0 0 400 400" role="img" aria-label="Corte transversal de uma artéria coronária mostrando a placa crescendo e estreitando o lúmen">
+          <defs>
+            <clipPath id="clipP"><circle id="clipC" cx="200" cy="200" r="96"/></clipPath>
+            <pattern id="fibrin" width="7" height="7" patternUnits="userSpaceOnUse" patternTransform="rotate(35)">
+              <rect width="7" height="7" fill="var(--clot)"/><line x1="0" y1="0" x2="0" y2="7" stroke="var(--blood)" stroke-width="2.2"/>
+            </pattern>
+          </defs>
+          <circle id="adv" fill="var(--adv)"/>
+          <circle id="med" fill="var(--media)"/>
+          <circle id="int" fill="var(--intima)"/>
+          <circle id="lum" cx="200" cy="200" r="90" fill="var(--blood)"/>
+          <circle id="clot" cx="200" cy="200" r="90" fill="url(#fibrin)" opacity="0"/>
+          <g clip-path="url(#clipP)">
+            <circle id="plaq" fill="var(--fibrous)" stroke="var(--adv)" stroke-width="1"/>
+            <circle id="core" fill="var(--lipid)"/>
+            <g id="calc" fill="var(--surface)" opacity="0"></g>
+          </g>
+          <circle id="endo" cx="200" cy="200" r="90" fill="none" stroke="var(--endo)" stroke-width="3"/>
+          <circle id="endoW" cx="200" cy="200" r="90" fill="none" stroke="var(--warn)" stroke-width="3" stroke-dasharray="7 6" opacity="0"/>
+          <circle id="rup" r="10" fill="var(--lipid)" stroke="var(--accent)" stroke-width="2.5" opacity="0"/>
+          <g id="xl" font-size="12"></g>
+        </svg>
+        <figcaption id="crossCap">Corte transversal. O vermelho é o sangue que ainda passa pelo lúmen.</figcaption>
+      </figure>
+    </div>
+
+    <div class="card panel" aria-live="polite">
+      <div>
+        <div class="time" id="time"></div>
+        <h2 id="title"></h2>
+      </div>
+      <p class="lede" id="lede"></p>
+      <ul id="points"></ul>
+      <p class="clinic"><b>Na prática</b><span id="clinic"></span></p>
+      <div>
+        <div class="gauge-head"><span>Área do lúmen reduzida (esquema)</span><output id="stenVal">0%</output></div>
+        <div class="gauge" role="img" aria-label="Barra de redução do lúmen"><i id="stenBar"></i><u></u></div>
+        <div class="gauge-note"><span>Sem sintomas até cerca de 40–50%</span><span>Marca em 70%: limita o fluxo no esforço</span></div>
+      </div>
+      <div class="nav">
+        <button class="btn" id="prev" type="button">Anterior</button>
+        <button class="btn primary" id="next" type="button">Próxima etapa</button>
+      </div>
+    </div>
+  </section>
+
+  <section class="card">
+    <figure>
+      <svg id="wall" viewBox="0 0 400 280" role="img" aria-label="Detalhe microscópico da parede arterial: endotélio, íntima e média">
+        <rect x="0" y="0" width="400" height="88" fill="var(--blood-soft)"/>
+        <rect x="0" y="102" width="400" height="88" fill="var(--intima)"/>
+        <rect x="0" y="190" width="400" height="90" fill="var(--media)"/>
+        <text class="band" x="8" y="16">LÚMEN</text>
+        <text class="band" x="8" y="118">ÍNTIMA</text>
+        <text class="band" x="8" y="206">MÉDIA</text>
+        <g id="wallDyn" class="fade"></g>
+      </svg>
+      <figcaption id="wallCap"></figcaption>
+    </figure>
+  </section>
+
+  <section class="card">
+    <h3>O que acelera o processo</h3>
+    <p class="sub" style="margin-top:4px">Toque em um fator para ver em que ponto da sequência ele atua.</p>
+    <div class="risk" id="risk"></div>
+    <p class="risk-out" id="riskOut"></p>
+  </section>
+
+  <p class="foot">Esquema didático: proporções, tempos e percentuais são ilustrativos e variam muito entre pessoas e entre segmentos da mesma artéria. Não substitui avaliação médica nem exames de imagem.</p>
+</div>
+
+<script>
+(function () {
+  var NS = "http://www.w3.org/2000/svg";
+  var ANG = 40 * Math.PI / 180, UX = Math.cos(ANG), UY = Math.sin(ANG);
+  function pt(a) { return [200 + a * UX, 200 + a * UY]; }
+  function $(id) { return document.getElementById(id); }
+  function el(tag, attrs, parent) {
+    var e = document.createElementNS(NS, tag);
+    for (var k in attrs) e.setAttribute(k, attrs[k]);
+    if (parent) parent.appendChild(e);
+    return e;
+  }
+
+  /* parâmetros do corte transversal por etapa (posições medidas ao longo do eixo da placa) */
+  var Z = { g: 0, pc: 0, pP: 0, cc: 0, cr: 0, thr: 0, rup: 0, calc: 0, endoW: 0 };
+  var STAGES = [
+    { name: "Artéria sadia", time: "Ponto de partida",
+      p: { g: 0, pc: 100, pP: 0, cc: 100, cr: 0, thr: 0, rup: 0, calc: 0, endoW: 0 },
+      title: "A parede arterial saudável",
+      lede: "A coronária tem três camadas. A íntima é revestida por uma única camada de células endoteliais, que funciona como barreira e produz óxido nítrico, um vasodilatador que também impede plaquetas e leucócitos de grudar.",
+      points: ["Íntima: endotélio e pouco tecido de sustentação.", "Média: células musculares lisas e elastina, que controlam o calibre.", "Adventícia: camada externa com vasos e nervos."],
+      clinic: "O fluxo laminar do exercício regular estimula o endotélio a produzir mais óxido nítrico.",
+      cap: "Endotélio íntegro: poucas partículas de LDL atravessam e quase nenhuma célula inflamatória adere.",
+      ann: [[200, 60, "Endotélio íntegro: barreira + óxido nítrico"]] },
+    { name: "Lesão do endotélio", time: "Primeiras décadas",
+      p: { g: 0, pc: 100, pP: 0, cc: 100, cr: 0, thr: 0, rup: 0, calc: 0, endoW: 1 },
+      title: "Disfunção endotelial",
+      lede: "Colesterol LDL alto, pressão elevada, fumo, glicose alta e inflamação agridem o endotélio. Ele passa a produzir menos óxido nítrico e fica mais permeável.",
+      points: ["As junções entre as células se afrouxam e o LDL entra com mais facilidade.", "O endotélio expõe moléculas de adesão (VCAM-1, ICAM-1) que \"puxam\" monócitos do sangue.", "Começa em curvas e bifurcações, onde o fluxo é turbulento e a força de cisalhamento é baixa."],
+      clinic: "Ainda não existe placa e nenhum exame de imagem comum mostra algo. A disfunção pode ser medida por dilatação mediada por fluxo.",
+      cap: "Células endoteliais com gaps entre si (laranja) deixam LDL passar e expõem moléculas de adesão.",
+      ann: [[200, 62, "Junções frouxas · VCAM-1 e ICAM-1 expressas"]] },
+    { name: "LDL preso e oxidado", time: "Primeiras décadas",
+      p: { g: 1, pc: 106, pP: 14, cc: 106, cr: 14, thr: 0, rup: 0, calc: 0, endoW: 1 },
+      title: "O LDL fica retido e se oxida",
+      lede: "Partículas de LDL cruzam o endotélio e prendem-se aos proteoglicanos da íntima. Ali ficam expostas a radicais livres e se modificam por oxidação.",
+      points: ["Quanto mais partículas com ApoB circulam e quanto mais tempo ficam, mais entram na parede.", "O LDL oxidado já não é \"colesterol neutro\": é um sinal de alarme para o sistema imune.", "A parede responde chamando células de defesa."],
+      clinic: "É a razão de o LDL e o ApoB serem medidos ao longo da vida, e não só quando surgem sintomas.",
+      cap: "Pontos escuros na íntima: LDL oxidado acumulando-se sob o endotélio.",
+      ann: [[200, 62, "LDL entra pelas junções frouxas"], [200, 182, "LDL retido e oxidado na íntima"]] },
+    { name: "Células espumosas", time: "Da infância à 3ª década",
+      p: { g: 4, pc: 110, pP: 26, cc: 110, cr: 26, thr: 0, rup: 0, calc: 0, endoW: 1 },
+      title: "Inflamação e estria gordurosa",
+      lede: "Monócitos aderem ao endotélio, atravessam e viram macrófagos. Os macrófagos engolem o LDL oxidado sem freio e viram células espumosas, cheias de gotículas de gordura.",
+      points: ["Sinais químicos (como o MCP-1) guiam os monócitos para dentro da íntima.", "Células espumosas acumuladas formam a estria gordurosa, a lesão mais precoce visível.", "Elas liberam citocinas que mantêm a inflamação ativa."],
+      clinic: "Estrias gordurosas já aparecem em adolescentes. Nessa fase ainda é possível reverter com mudanças de estilo de vida e redução de LDL.",
+      cap: "Monócitos (azul) aderem e atravessam; na íntima viram macrófagos e depois células espumosas (amarelo).",
+      ann: [[200, 62, "Monócitos aderem e migram"], [200, 182, "Macrófagos → células espumosas"]] },
+    { name: "Placa fibrosa", time: "3ª a 5ª década",
+      p: { g: 14, pc: 114, pP: 60, cc: 90, cr: 26, thr: 0, rup: 0, calc: 0.4, endoW: 1 },
+      title: "Capa fibrosa e núcleo lipídico",
+      lede: "Células musculares lisas migram da média para a íntima e produzem colágeno, formando a capa fibrosa. Por baixo, células espumosas morrem e deixam um núcleo lipídico necrótico.",
+      points: ["A capa isola o núcleo gorduroso do sangue.", "Células mortas e cristais de colesterol alimentam a inflamação dentro da placa.", "A artéria cresce para fora (remodelamento positivo) e o lúmen quase não muda."],
+      clinic: "Pode haver placa grande sem estreitamento importante. A angiografia pode parecer normal, mas o escore de cálcio e a angiotomografia mostram a placa.",
+      cap: "Capa fibrosa (bege) cobrindo o núcleo lipídico; células musculares lisas sobem da média.",
+      ann: [[200, 62, "Capa fibrosa sobre núcleo lipídico necrótico"]] },
+    { name: "Estenose estável", time: "A partir da 5ª década",
+      p: { g: 24, pc: 90, pP: 130, cc: 45, cr: 58, thr: 0, rup: 0, calc: 1, endoW: 0 },
+      title: "Estreitamento do lúmen: angina",
+      lede: "Depois que a artéria esgota a capacidade de crescer para fora, a placa passa a invadir o lúmen. Com redução de cerca de 70% ou mais, o fluxo basta em repouso mas não no esforço.",
+      points: ["Capa espessa e calcificada: a placa tende a ser estável.", "No esforço o músculo pede mais oxigênio do que a artéria consegue entregar.", "A dor some em minutos com o repouso, quando a demanda cai."],
+      clinic: "Quadro típico da angina estável: aperto no peito ao esforço que melhora ao parar. O teste ergométrico ou a cintilografia podem provocar isquemia.",
+      cap: "Capa espessa e pontos de calcificação (branco). A placa ocupa grande parte da luz arterial.",
+      ann: [[200, 60, "Capa espessa e calcificada"]] },
+    { name: "Ruptura e trombo", time: "Evento agudo",
+      p: { g: 24, pc: 90, pP: 130, cc: 22, cr: 58, thr: 1, rup: 1, calc: 1, endoW: 0 },
+      title: "Ruptura da placa e infarto",
+      lede: "Uma capa fina, cheia de macrófagos, rompe sob o estresse do fluxo. O núcleo lipídico e o colágeno ficam em contato com o sangue, que reage como se fosse um corte.",
+      points: ["O fator tecidual do núcleo ativa a coagulação e o colágeno ativa as plaquetas.", "Plaquetas e fibrina formam um trombo que ocupa o lúmen em minutos.", "A erosão da superfície também pode dar trombo, sem ruptura franca."],
+      clinic: "Muitas vezes a placa que rompe estava com menos de 70% de estenose: por isso o infarto pode ser a primeira manifestação. Dor intensa e prolongada no peito exige o serviço de emergência na hora.",
+      cap: "Capa fina rompida, núcleo lipídico exposto e trombo (plaquetas + fibrina) formado no lúmen.",
+      ann: [[200, 58, "Trombo: plaquetas + fibrina"], [200, 182, "Capa rompida · núcleo exposto"]] }
+  ];
+
+  /* ----- corte transversal ----- */
+  var cur = JSON.parse(JSON.stringify(STAGES[0].p));
+  var calcG = $("calc");
+  [[130, -55], [150, -20], [118, 40], [160, 30], [140, 60], [175, 5]].forEach(function (c) {
+    // pequenos retângulos de cálcio distribuídos na placa (coordenadas relativas ao eixo)
+    var cx = 200 + c[0] * UX - c[1] * UY, cy = 200 + c[0] * UY + c[1] * UX;
+    el("rect", { x: cx - 4, y: cy - 4, width: 8, height: 8, rx: 2, transform: "rotate(" + (c[0] % 90) + " " + cx + " " + cy + ")" }, calcG);
+  });
+
+  function coverage(p) {
+    if (p.pP < 1) return 0;
+    var c = pt(p.pc), n = 70, inLum = 0, cov = 0, step = 180 / n;
+    for (var i = 0; i < n; i++) for (var j = 0; j < n; j++) {
+      var x = 200 - 90 + (i + 0.5) * step, y = 200 - 90 + (j + 0.5) * step;
+      if ((x - 200) * (x - 200) + (y - 200) * (y - 200) > 8100) continue;
+      inLum++;
+      if ((x - c[0]) * (x - c[0]) + (y - c[1]) * (y - c[1]) < p.pP * p.pP) cov++;
+    }
+    return inLum ? cov / inLum : 0;
+  }
+
+  function draw(p) {
+    var gc = [200 + p.g * UX, 200 + p.g * UY];
+    [["adv", 142], ["med", 122], ["int", 96]].forEach(function (a) {
+      var e = $(a[0]); e.setAttribute("cx", gc[0]); e.setAttribute("cy", gc[1]); e.setAttribute("r", a[1] + p.g);
+    });
+    $("clipC").setAttribute("cx", gc[0]); $("clipC").setAttribute("cy", gc[1]); $("clipC").setAttribute("r", 96 + p.g);
+    var pc = pt(p.pc), cc = pt(p.cc);
+    $("plaq").setAttribute("cx", pc[0]); $("plaq").setAttribute("cy", pc[1]); $("plaq").setAttribute("r", Math.max(p.pP, 0));
+    $("core").setAttribute("cx", cc[0]); $("core").setAttribute("cy", cc[1]); $("core").setAttribute("r", Math.max(p.cr, 0));
+    $("clot").setAttribute("opacity", p.thr);
+    $("calc").setAttribute("opacity", p.calc);
+    $("endoW").setAttribute("opacity", p.endoW);
+    $("endo").setAttribute("opacity", 1 - p.endoW * 0.6);
+    var rp = pt(p.pc - p.pP);
+    $("rup").setAttribute("cx", rp[0]); $("rup").setAttribute("cy", rp[1]); $("rup").setAttribute("opacity", p.rup);
+    var cv = coverage(p), v = cv * (1 - p.thr) + p.thr;
+    var pct = Math.round(v * 100);
+    $("stenVal").textContent = pct + "%";
+    $("stenBar").style.width = pct + "%";
+  }
+
+  var raf = 0;
+  var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  function tweenTo(target) {
+    cancelAnimationFrame(raf);
+    var from = JSON.parse(JSON.stringify(cur)), t0 = null, dur = reduce ? 1 : 650;
+    function tick(ts) {
+      if (t0 === null) t0 = ts;
+      var k = Math.min(1, (ts - t0) / dur), e = k < 0.5 ? 2 * k * k : 1 - Math.pow(-2 * k + 2, 2) / 2;
+      for (var key in target) cur[key] = from[key] + (target[key] - from[key]) * e;
+      draw(cur);
+      if (k < 1) raf = requestAnimationFrame(tick);
+    }
+    raf = requestAnimationFrame(tick);
+  }
+
+  function annotate(g, list) {
+    g.innerHTML = "";
+    list.forEach(function (a) {
+      var t = el("text", { x: a[0], y: a[1], "text-anchor": "middle", "class": "ann" }, g);
+      t.textContent = a[2];
+    });
+  }
+
+  /* ----- detalhe da parede ----- */
+  function wallScene(s) {
+    var g = $("wallDyn"); g.innerHTML = ""; g.setAttribute("class", "");
+    void g.getBoundingClientRect(); g.setAttribute("class", "fade");
+    var capT = s >= 5 ? (s === 5 ? 12 : s === 6 ? 22 : 5) : 0;
+
+    // média: células musculares lisas
+    for (var i = 0; i < 9; i++) el("ellipse", { cx: 30 + i * 43, cy: 232 + (i % 2) * 22, rx: 17, ry: 5, fill: "var(--surface)", opacity: 0.35, transform: "rotate(" + (i % 2 ? -8 : 6) + " " + (30 + i * 43) + " " + (232 + (i % 2) * 22) + ")" }, g);
+
+    // capa e núcleo
+    if (s >= 5) {
+      var coreTop = 102 + capT;
+      el("rect", { x: 70, y: 102, width: 260, height: capT + 70, rx: 18, fill: "var(--fibrous)" }, g);
+      if (s === 7) el("rect", { x: 188, y: 100, width: 28, height: capT + 6, fill: "var(--blood-soft)" }, g);
+      el("ellipse", { cx: 200, cy: coreTop + 32, rx: 100, ry: 32, fill: "var(--lipid)", opacity: 0.95 }, g);
+      for (var c = 0; c < 9; c++) {
+        var cx = 130 + c * 17, cy = coreTop + 22 + (c % 3) * 10;
+        el("line", { x1: cx, y1: cy, x2: cx + 9, y2: cy + 5, stroke: "var(--ldl-ox)", "stroke-width": 1.6, opacity: 0.7 }, g);
+      }
+      if (s >= 6) [[90, 150], [108, 165], [305, 150], [320, 165]].forEach(function (c) {
+        el("rect", { x: c[0], y: c[1], width: 8, height: 8, rx: 2, fill: "var(--surface)" }, g);
+      });
+      // células musculares lisas na capa
+      if (s <= 6) for (var m = 0; m < 6; m++) el("ellipse", { cx: 100 + m * 40, cy: 102 + capT / 2, rx: 11, ry: Math.min(4, capT / 3), fill: "var(--media)" }, g);
+      if (s === 5) [110, 290].forEach(function (x) {
+        el("path", { d: "M" + x + " 214 L" + x + " 140", stroke: "var(--media)", "stroke-width": 2.5, "stroke-dasharray": "5 4", fill: "none" }, g);
+        el("path", { d: "M" + (x - 5) + " 148 L" + x + " 138 L" + (x + 5) + " 148", stroke: "var(--media)", "stroke-width": 2.5, fill: "none" }, g);
+      });
+    }
+
+    // endotélio
+    for (var e = 0; e < 11; e++) {
+      if (s === 7 && e === 5) continue;
+      var disf = s >= 2 && s <= 4 && e >= 3 && e <= 7;
+      var w = disf ? 24 : 32, x = e * 36 + 4 + (32 - w) / 2;
+      el("rect", { x: x, y: 88, width: w, height: 14, rx: 6, fill: disf ? "var(--warn)" : "var(--endo)", opacity: disf ? 0.9 : 1 }, g);
+    }
+
+    // LDL no lúmen
+    var lumenPts = [[40, 30], [110, 52], [170, 24], [232, 46], [300, 28], [355, 56], [70, 70], [275, 68]];
+    lumenPts.slice(0, s === 1 ? 4 : 8).forEach(function (q) { el("circle", { cx: q[0], cy: q[1], r: 4.5, fill: "var(--ldl)", stroke: "var(--blood)", "stroke-width": 1 }, g); });
+
+    // LDL oxidado na íntima
+    if (s >= 2 && s <= 4) {
+      var ox = [[90, 130], [140, 118], [190, 150], [240, 125], [290, 142], [335, 120], [120, 168], [260, 170], [175, 120], [315, 166], [60, 150], [220, 108]];
+      ox.slice(0, s === 2 ? 3 : s === 3 ? 12 : 6).forEach(function (q) {
+        el("circle", { cx: q[0], cy: q[1], r: 4.5, fill: s === 2 ? "var(--ldl)" : "var(--ldl-ox)", stroke: "var(--blood)", "stroke-width": 1 }, g);
+      });
+    }
+
+    // monócitos e células espumosas
+    function mono(x, y, r) {
+      el("circle", { cx: x, cy: y, r: r, fill: "var(--mono)", opacity: 0.95 }, g);
+      el("circle", { cx: x - 1, cy: y, r: r * 0.5, fill: "var(--surface)", opacity: 0.55 }, g);
+    }
+    function foam(x, y) {
+      el("circle", { cx: x, cy: y, r: 17, fill: "var(--mono)", opacity: 0.85 }, g);
+      [[-7, -5], [6, -7], [-3, 6], [8, 5], [0, -1]].forEach(function (v) {
+        el("circle", { cx: x + v[0], cy: y + v[1], r: 5, fill: "var(--lipid)", stroke: "var(--surface)", "stroke-width": 0.8 }, g);
+      });
+    }
+    if (s === 4) {
+      mono(110, 79, 9); mono(245, 80, 9); mono(168, 104, 8);
+      foam(85, 142); foam(165, 152); foam(250, 140); foam(318, 155);
+    }
+    if (s === 5 || s === 6) { foam(76, 128); foam(324, 128); }
+    if (s === 7) { foam(150, 118); foam(250, 118); foam(76, 128); mono(110, 79, 9); }
+
+    // trombo
+    if (s === 7) {
+      el("path", { d: "M135 90 C140 40 175 28 202 30 C240 30 268 48 270 90 Z", fill: "var(--clot)" }, g);
+      for (var f = 0; f < 6; f++) el("line", { x1: 150 + f * 20, y1: 88, x2: 170 + f * 14, y2: 44, stroke: "var(--blood)", "stroke-width": 2, opacity: 0.8 }, g);
+      [[165, 62], [200, 50], [235, 64], [185, 78], [220, 80]].forEach(function (q) { el("circle", { cx: q[0], cy: q[1], r: 5, fill: "var(--surface)", opacity: 0.85 }, g); });
+    }
+
+    // anotações do detalhe
+    var notes = {
+      1: [[200, 76, "Endotélio íntegro"]],
+      2: [[200, 76, "Células afastadas: LDL passa, moléculas de adesão expostas"]],
+      3: [[200, 182, "LDL oxidado"]],
+      4: [[200, 76, "Monócitos aderindo"], [200, 188, "Células espumosas (macrófagos + gordura)"]],
+      5: [[200, 76, "Capa fibrosa"], [200, 182, "Núcleo lipídico necrótico"]],
+      6: [[200, 76, "Capa espessa e calcificada"], [200, 182, "Núcleo lipídico"]],
+      7: [[320, 60, "Trombo"], [200, 182, "Núcleo exposto pela ruptura"]]
+    };
+    var wallNotes = { 5: [200, 76], 7: [320, 60] };
+    notes[s].forEach(function (a) {
+      var t = el("text", { x: a[0], y: a[1], "text-anchor": "middle", "class": "ann" }, g);
+      t.textContent = a[2];
+    });
+  }
+
+  /* ----- etapa atual ----- */
+  var stage = 1;
+  var stepsEl = $("steps");
+  STAGES.forEach(function (s, i) {
+    var b = document.createElement("button");
+    b.type = "button"; b.className = "step";
+    b.innerHTML = "<b>" + (i + 1) + "</b><span>" + s.name + "</span>";
+    b.addEventListener("click", function () { go(i + 1); });
+    stepsEl.appendChild(b);
+  });
+
+  function go(n) {
+    stage = Math.max(1, Math.min(7, n));
+    var s = STAGES[stage - 1];
+    Array.prototype.forEach.call(stepsEl.children, function (b, i) {
+      if (i + 1 === stage) b.setAttribute("aria-current", "step"); else b.removeAttribute("aria-current");
+      b.classList.toggle("done", i + 1 < stage);
+    });
+    $("time").textContent = "Etapa " + stage + " de 7 · " + s.time;
+    $("title").textContent = s.title;
+    $("lede").textContent = s.lede;
+    $("points").innerHTML = s.points.map(function (t) { return "<li>" + t + "</li>"; }).join("");
+    $("clinic").textContent = s.clinic;
+    $("wallCap").textContent = s.cap;
+    $("prev").disabled = stage === 1;
+    $("next").disabled = stage === 7;
+    $("next").textContent = stage === 7 ? "Fim da sequência" : "Próxima etapa";
+    annotate($("xl"), s.ann.map(function (a) { return [200, a[1] > 150 ? 392 : 18, a[2]]; }).slice(0, 1));
+    wallScene(stage);
+    tweenTo(s.p);
+    var active = stepsEl.children[stage - 1];
+    if (active && active.scrollIntoView) { try { active.scrollIntoView({ block: "nearest", inline: "nearest" }); } catch (e) {} }
+  }
+  $("prev").addEventListener("click", function () { go(stage - 1); });
+  $("next").addEventListener("click", function () { go(stage + 1); });
+  document.addEventListener("keydown", function (e) {
+    if (e.key === "ArrowRight") go(stage + 1);
+    else if (e.key === "ArrowLeft") go(stage - 1);
+  });
+
+  /* ----- fatores de risco ----- */
+  var RISK = [
+    ["LDL / ApoB alto", "Etapas 2–4. Mais partículas circulando significa mais LDL cruzando o endotélio e ficando preso. Esse é o combustível da placa."],
+    ["Hipertensão", "Etapa 2. A pressão alta aumenta o estresse mecânico e a permeabilidade do endotélio, e favorece a entrada do LDL."],
+    ["Tabagismo", "Etapas 2–7. Lesa o endotélio, reduz o óxido nítrico, favorece a oxidação do LDL e deixa as plaquetas mais reativas."],
+    ["Diabetes e resistência à insulina", "Etapas 2–6. A glicose alta modifica proteínas e lipoproteínas, aumenta a inflamação e acelera a formação do núcleo lipídico."],
+    ["Inflamação crônica", "Etapas 4–7. Mantém os macrófagos ativos e afina a capa fibrosa, o que aumenta o risco de ruptura."],
+    ["Lp(a) e genética", "Etapas 3–6. A Lp(a) é uma partícula de LDL com poder aterogênico próprio. É um nível herdado e quase não muda com estilo de vida."],
+    ["Exercício regular (protetor)", "Etapas 1–2. Aumenta o fluxo laminar, melhora a produção de óxido nítrico, ajuda a controlar pressão, glicose e peso e reduz a inflamação."]
+  ];
+  var riskEl = $("risk"), out = $("riskOut");
+  out.textContent = "Escolha um fator acima.";
+  RISK.forEach(function (r, i) {
+    var b = document.createElement("button");
+    b.type = "button"; b.className = "chip" + (i === 6 ? " protect" : "");
+    b.id = "chip" + i; b.textContent = r[0]; b.setAttribute("aria-pressed", "false");
+    b.addEventListener("click", function () {
+      Array.prototype.forEach.call(riskEl.children, function (c) { c.setAttribute("aria-pressed", c === b ? "true" : "false"); });
+      out.textContent = r[1];
+    });
+    riskEl.appendChild(b);
+  });
+
+  draw(cur);
+  go(1);
+})();
+</script>
