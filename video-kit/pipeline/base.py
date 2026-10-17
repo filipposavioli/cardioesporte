@@ -1,17 +1,17 @@
 import json, subprocess, os
 from edl import CROPS
 cl = json.load(open("clips.json"))
-os.makedirs("base2", exist_ok=True)
-lst = open("base2/list.txt", "w")
+os.makedirs("base3", exist_ok=True)
+lst = open("base3/list.txt", "w")
 for i, c in enumerate(cl):
     d = c["dur"]
     if c["src"] is None:
         lst.write(f"file 'c{i:03d}.mov'\n")
         subprocess.run(["ffmpeg","-loglevel","error","-y","-f","lavfi","-i","color=black:s=1920x1080:r=30","-f","lavfi","-i","anullsrc=r=48000:cl=stereo",
-            "-frames:v",str(round(d*30)),"-t",f"{d:.3f}","-c:v","libx264","-crf","16","-pix_fmt","yuv420p","-c:a","pcm_s16le",f"base2/c{i:03d}.mov"],check=True)
+            "-frames:v",str(round(d*30)),"-t",f"{d:.3f}","-c:v","libx264","-crf","16","-pix_fmt","yuv420p","-c:a","pcm_s16le",f"base3/c{i:03d}.mov"],check=True)
         continue
     x, y, w, h = CROPS[c["frame"]]
-    out = f"base2/c{i:03d}.mov"
+    out = f"base3/c{i:03d}.mov"
     lst.write(f"file 'c{i:03d}.mov'\n")
     if os.path.exists(out): continue
     d = c["dur"]

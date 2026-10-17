@@ -1,8 +1,9 @@
 """Edit decision list: cortes, enquadramentos e mapeamento tempo-fonte -> tempo-saída."""
 import json
 
-SRC_IN, SRC_OUT = 9.5, 239.5
-EXCLUDE = [(134.40, 138.15)]          # tropeço "É o que chamamos em dias de..."
+SRC_IN, SRC_OUT = 9.5, 645.0
+EXCLUDE = [(134.40, 138.15),          # tropeço "É o que chamamos em dias de..."
+           (352.10, 368.05)]          # primeira tentativa de "Ela aumenta tanto..."
 MERGE_GAP = 0.40                      # pausas menores que isso não viram corte
 PAD_IN, PAD_OUT = 0.12, 0.28
 
@@ -12,6 +13,7 @@ CROPS = {
     "MED":   (555, 150, 2880, 1620),
     "CLOSE": (1035, 255, 1920, 1080),
     "LEFT":  (960, 150, 2880, 1620),
+    "LEFT2": (1073, 206, 2560, 1440),
     "PIP":   (1665, 315, 1920, 1080),
 }
 
@@ -21,9 +23,14 @@ PLAN = [
     (43.4, 54.6, "WIDE"), (54.6, 95.5, "LEFT"), (95.5, 108.9, "CLOSE"),
     (108.9, 114.0, "MED"), (114.0, 146.9, "LEFT"), (146.9, 159.0, "MED"),
     (159.0, 180.3, "LEFT"), (180.3, 193.5, "CLOSE"), (193.5, 219.2, "LEFT"),
-    (219.2, 230.4, "LEFT"), (230.4, 232.2, "MED"), (232.2, 240.0, "CLOSE"),
+    (219.2, 230.4, "LEFT"), (230.4, 232.2, "MED"), (232.2, 239.9, "CLOSE"),
+    (239.9, 243.9, "MED"), (243.9, 296.5, "LEFT"), (296.5, 302.0, "MED"), (302.0, 309.0, "CLOSE"),
+    (309.0, 387.8, "LEFT"), (387.8, 397.6, "CLOSE"), (397.6, 413.9, "LEFT"), (413.9, 427.3, "CLOSE"),
+    (427.3, 444.9, "LEFT"), (444.9, 456.0, "MED"), (456.0, 479.2, "LEFT"), (479.2, 489.4, "CLOSE"),
+    (489.4, 497.7, "MED"), (497.7, 508.2, "CLOSE"), (508.2, 578.4, "LEFT"), (578.4, 585.0, "CLOSE"),
+    (585.0, 586.5, "MED"), (586.5, 614.6, "LEFT"), (614.6, 646.0, "MED"),
 ]
-ALT = {"MED": "CLOSE"}   # alternância nos jump cuts
+ALT = {"MED": "CLOSE", "LEFT": "LEFT2"}   # alternância nos jump cuts
 # pausas inseridas (tela de capítulo): corta no tempo-fonte indicado e insere a pausa
 GAPS = {113.6: 0.3, 148.1: 0.6}
 

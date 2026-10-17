@@ -9,3 +9,4 @@ Conteúdo e materiais da Cardioesporte (Dr. Filippo Savioli, Cardiologia do Espo
   Azul Medium `#006C92`, Verde Saúde `#9FC742`, Cinza Concreto `#BDBEC0`, Grafite `#1C1D21`),
   logo com a fonte original em verde + branco, títulos em Inter Display Black.
 - Afirmações científicas sempre com fonte completa; conferir números no artigo original.
+- Edição de vídeos do YouTube: seguir o padrão aprovado em `video-kit/PADRAO.md` e o pipeline em `video-kit/pipeline/`.

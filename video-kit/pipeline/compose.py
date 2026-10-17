@@ -13,4 +13,4 @@ subprocess.run(args,check=True)
 subprocess.run(['ffmpeg','-loglevel','error','-y','-i','comp.mov','-i','endcard.mov','-filter_complex',
   f'[0:a]apad=whole_dur={D}[a0];[0:v][a0][1:v][1:a]concat=n=2:v=1:a=1[v][a]','-map','[v]','-map','[a]',
   '-c:v','libx264','-preset','slow','-crf','18','-pix_fmt','yuv420p','-c:a','aac','-b:a','192k','-movflags','+faststart',
-  'amostra_zona2_youtube.mp4'],check=True)
+  'zonas_de_treino_youtube.mp4'],check=True)

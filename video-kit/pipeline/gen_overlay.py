@@ -21,6 +21,9 @@ IV = [
     ("melhora",219.30, 230.30),
     ("punch",  232.20, 239.40),
 ]
+from overlay_p2 import build
+IV2, CSS2, HTML2 = build(T)
+IV += IV2
 iv = {n: (T(a), T(b)) for n, a, b in IV}
 s = lambda n: iv[n][0]
 e = lambda n: iv[n][1]
@@ -163,6 +166,7 @@ html, body {{ width:1920px; height:1080px; overflow:hidden; background:transpare
 #punch .t {{ position:absolute; left:0; right:0; bottom:120px; text-align:center; }}
 #punch .a {{ font-size:64px; font-weight:900; text-transform:uppercase; letter-spacing:-1px; text-shadow:0 2px 24px rgba(0,0,0,.6); animation:up .5s var(--ease) {T(232.3)}s; }}
 #punch .box {{ font-size:72px; margin-top:12px; animation:pop .6s var(--pop) {T(235.75)}s; }}
+{CSS2}
 </style></head><body>
 
 <section class="g" id="hook"><div class="stack">
@@ -244,6 +248,7 @@ html, body {{ width:1920px; height:1080px; overflow:hidden; background:transpare
   <div class="a">Zona 2 é fundamental…</div>
   <div class="box">mas sozinha não é suficiente</div>
 </div></section>
+{HTML2}
 </body></html>"""
 
 open("overlay.html", "w").write(html)

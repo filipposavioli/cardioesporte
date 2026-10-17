@@ -9,7 +9,7 @@ const fs = require('fs');
   await p.waitForTimeout(500);
   for (const [name, [a, e]] of Object.entries(iv)) {
     if (only.length && !only.includes(name)) continue;
-    const dir = `ov2/${name}`; fs.mkdirSync(dir, { recursive: true });
+    const dir = `ov4/${name}`; fs.mkdirSync(dir, { recursive: true });
     await p.evaluate(n => document.querySelectorAll('section').forEach(s => s.style.display = s.id === n ? '' : 'none'), name);
     const f0 = Math.round(a * 30), f1 = Math.round(e * 30);
     for (let f = f0; f < f1; f++) {
