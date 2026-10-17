@@ -4,7 +4,8 @@ Componentes reutilizáveis: panel, btitle, chap, likesub. Tempos em segundos do 
 CSS = """
 .btitle { position:absolute; left:0; right:0; bottom:110px; text-align:center; }
 .btitle .a { font-size:46px; font-weight:800; text-transform:uppercase; text-shadow:0 2px 20px rgba(0,0,0,.6); }
-.btitle .box { font-size:76px; margin-top:10px; }
+.btitle .box { font-size:76px; margin-top:10px; max-width:1500px; }
+.btitle .box.long { font-size:60px; max-width:1100px; line-height:1.1; }
 .btitle .b { font-size:34px; font-weight:700; margin-top:16px; text-shadow:0 2px 16px rgba(0,0,0,.7); }
 .chap .q { font-size:120px; font-weight:900; letter-spacing:-4px; line-height:1.02; text-align:center; text-transform:uppercase; }
 .chap .q span { color:var(--verde); }
@@ -84,7 +85,7 @@ def build(T):
     def btitle(id_, s, e, small=None, box=None, sub=None):
         p = []
         if small: p.append(f'<div class="a" style="animation:{a("up", .5, small[0])}">{small[1]}</div>')
-        if box: p.append(f'<div class="box" style="animation:{a("pop", .6, box[0], "var(--pop)")}">{box[1]}</div>')
+        if box: p.append(f'<div class="box{" long" if len(box[1]) > 30 else ""}" style="animation:{a("pop", .6, box[0], "var(--pop)")}">{box[1]}</div>')
         if sub: p.append(f'<div class="b" style="animation:{a("up", .5, sub[0])}">{sub[1]}</div>')
         sec(id_, s, e, f'<div class="btitle">{"".join(p)}</div>')
 

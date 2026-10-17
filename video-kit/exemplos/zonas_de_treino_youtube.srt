@@ -1,0 +1,932 @@
+1
+00:00:00,120 --> 00:00:02,620
+Você já ouviu falar em zona 2,
+
+2
+00:00:02,640 --> 00:00:05,430
+zona 4, limiar de lactato,
+
+3
+00:00:05,687 --> 00:00:07,527
+mas você sabe o que isso realmente
+
+4
+00:00:07,547 --> 00:00:09,317
+significa dentro do seu corpo?
+
+5
+00:00:09,553 --> 00:00:11,733
+Hoje eu vou tentar te explicar de um jeito
+
+6
+00:00:11,753 --> 00:00:14,473
+simples o que acontece nas suas células
+
+7
+00:00:14,493 --> 00:00:17,283
+quando você treina em cada intensidade.
+
+8
+00:00:17,520 --> 00:00:19,380
+E por que entender isso pode mudar
+
+9
+00:00:19,400 --> 00:00:21,500
+completamente os seus resultados de
+
+10
+00:00:21,520 --> 00:00:22,290
+treinamento.
+
+11
+00:00:22,553 --> 00:00:24,337
+Então, fica comigo até o final,
+
+12
+00:00:24,487 --> 00:00:27,447
+porque isso vai te ajudar a treinar com
+
+13
+00:00:27,467 --> 00:00:29,297
+muito mais inteligência.
+
+14
+00:00:29,553 --> 00:00:31,653
+Antes de começar, eu preciso te contar uma
+
+15
+00:00:31,673 --> 00:00:32,263
+coisa.
+
+16
+00:00:32,520 --> 00:00:35,780
+Durante décadas, o mundo do esporte
+
+17
+00:00:35,800 --> 00:00:39,120
+usou termos muito vagos para explicar
+
+18
+00:00:39,140 --> 00:00:40,390
+treino.
+
+19
+00:00:40,420 --> 00:00:43,100
+Você já deve ter ouvido frases como treine
+
+20
+00:00:43,120 --> 00:00:46,860
+entre 120 e 140 de frequência cardíaca ou
+
+21
+00:00:46,880 --> 00:00:50,170
+fique em 65% do seu VO₂ máximo.
+
+22
+00:00:50,420 --> 00:00:53,140
+Isso não te diz nada sobre o que realmente
+
+23
+00:00:53,160 --> 00:00:55,030
+está acontecendo dentro do seu corpo.
+
+24
+00:00:55,287 --> 00:00:58,257
+Grandes fisiologistas e pesquisadores,
+
+25
+00:00:58,367 --> 00:01:00,727
+como o professor Iñigo San-Millán,
+
+26
+00:01:00,747 --> 00:01:03,067
+que trabalha com atletas de elite e também
+
+27
+00:01:03,087 --> 00:01:05,937
+estuda metabolismo há mais de 30 anos,
+
+28
+00:01:06,067 --> 00:01:09,127
+desenvolveram uma forma muito mais precisa
+
+29
+00:01:09,147 --> 00:01:10,797
+de entender isso.
+
+30
+00:01:11,053 --> 00:01:13,833
+E é exatamente essa lógica que eu vou
+
+31
+00:01:13,853 --> 00:01:16,353
+tentar trazer aqui para você hoje de um
+
+32
+00:01:16,373 --> 00:01:18,223
+jeito simples de entender.
+
+33
+00:01:18,487 --> 00:01:19,877
+Vamos pensar assim.
+
+34
+00:01:20,087 --> 00:01:22,977
+O seu corpo é uma fábrica de energia.
+
+35
+00:01:23,220 --> 00:01:26,130
+E, dependendo da intensidade do esforço,
+
+36
+00:01:26,360 --> 00:01:29,080
+essa fábrica muda completamente o jeito de
+
+37
+00:01:29,100 --> 00:01:29,570
+trabalhar.
+
+38
+00:01:29,820 --> 00:01:32,523
+Então, vamos dissecar esse assunto.
+
+39
+00:01:32,593 --> 00:01:34,303
+Zona 1.
+
+40
+00:01:34,553 --> 00:01:37,433
+Imagina que você está caminhando bem
+
+41
+00:01:37,453 --> 00:01:38,363
+devagar.
+
+42
+00:01:38,493 --> 00:01:40,513
+Nessa intensidade, o seu corpo
+
+43
+00:01:40,533 --> 00:01:42,733
+praticamente não precisa se esforçar para
+
+44
+00:01:42,753 --> 00:01:43,703
+produzir energia.
+
+45
+00:01:43,953 --> 00:01:46,203
+Ele usa um pouquinho de gordura,
+
+46
+00:01:46,353 --> 00:01:49,953
+um pouquinho de glicose e praticamente
+
+47
+00:01:49,973 --> 00:01:52,343
+não gera lactato.
+
+48
+00:01:52,587 --> 00:01:54,457
+Essa é a zona 1.
+
+49
+00:01:54,720 --> 00:01:57,170
+É o que usamos em dias de recuperação.
+
+50
+00:01:57,420 --> 00:01:59,820
+As fibras musculares nem chegam a ser
+
+51
+00:01:59,840 --> 00:02:01,530
+estressadas metabolicamente.
+
+52
+00:02:01,787 --> 00:02:03,017
+A zona 2.
+
+53
+00:02:03,693 --> 00:02:05,013
+A zona que todo mundo fala,
+
+54
+00:02:05,033 --> 00:02:07,403
+mas poucos entendem de verdade.
+
+55
+00:02:07,653 --> 00:02:09,513
+Conforme você aumenta a intensidade,
+
+56
+00:02:09,533 --> 00:02:12,293
+o seu corpo precisa produzir energia mais
+
+57
+00:02:12,313 --> 00:02:12,883
+rápido.
+
+58
+00:02:13,120 --> 00:02:15,460
+E aqui existe um mito que a gente precisa
+
+59
+00:02:15,480 --> 00:02:16,590
+desfazer agora.
+
+60
+00:02:16,853 --> 00:02:19,833
+Muita gente acha que em intensidade
+
+61
+00:02:19,853 --> 00:02:22,473
+baixa, você não queima carboidrato,
+
+62
+00:02:22,493 --> 00:02:23,443
+só gordura.
+
+63
+00:02:23,687 --> 00:02:24,897
+Isso não é verdade.
+
+64
+00:02:25,153 --> 00:02:28,273
+Você sempre queima mais glicose do que
+
+65
+00:02:28,293 --> 00:02:30,283
+gordura em qualquer intensidade.
+
+66
+00:02:30,453 --> 00:02:32,043
+O que muda é a proporção.
+
+67
+00:02:32,287 --> 00:02:35,227
+A zona 2 é o ponto em que você atinge a
+
+68
+00:02:35,247 --> 00:02:38,297
+sua taxa máxima de queima de gordura.
+
+69
+00:02:38,367 --> 00:02:41,397
+É por isso que ela é tão importante.
+
+70
+00:02:41,653 --> 00:02:44,153
+E tem uma razão biológica muito clara para
+
+71
+00:02:44,173 --> 00:02:44,683
+isso.
+
+72
+00:02:44,920 --> 00:02:48,640
+A gordura só pode ser queimada dentro da
+
+73
+00:02:48,660 --> 00:02:51,080
+mitocôndria, que é a usina de energia
+
+74
+00:02:51,100 --> 00:02:51,790
+celular.
+
+75
+00:02:52,053 --> 00:02:54,803
+E as fibras musculares de contração lenta,
+
+76
+00:02:55,053 --> 00:02:57,373
+que são as mais recrutadas nessa
+
+77
+00:02:57,393 --> 00:03:00,567
+intensidade, são justamente as que têm
+
+78
+00:03:00,587 --> 00:03:01,837
+mais mitocôndrias.
+
+79
+00:03:02,087 --> 00:03:05,647
+Ou seja, treinar em zona 2 é literalmente
+
+80
+00:03:05,667 --> 00:03:08,337
+treinar a sua capacidade mitocondrial.
+
+81
+00:03:08,587 --> 00:03:11,087
+É aqui que você melhora a sua eficiência
+
+82
+00:03:11,107 --> 00:03:14,547
+em limpar o lactato produzido pelo corpo e
+
+83
+00:03:14,567 --> 00:03:18,167
+também a capacidade usar gordura
+
+84
+00:03:18,187 --> 00:03:19,517
+como combustível.
+
+85
+00:03:19,620 --> 00:03:21,390
+Mas preste atenção nisso.
+
+86
+00:03:21,520 --> 00:03:23,270
+Zona 2 é fundamental,
+
+87
+00:03:23,520 --> 00:03:26,330
+mas ela sozinha não é suficiente.
+
+88
+00:03:26,540 --> 00:03:28,430
+Eu vou te explicar o porquê daqui a pouco.
+
+89
+00:03:28,687 --> 00:03:32,437
+A zona 3, que é a zona de transição.
+
+90
+00:03:32,573 --> 00:03:34,753
+Conforme a intensidade sobe mais um
+
+91
+00:03:34,773 --> 00:03:37,340
+pouquinho, o corpo começa a precisar de
+
+92
+00:03:37,360 --> 00:03:40,340
+energia mais rápido do que a gordura
+
+93
+00:03:40,360 --> 00:03:41,770
+consegue fornecer.
+
+94
+00:03:42,020 --> 00:03:45,390
+E aí acontece uma mudança importante.
+
+95
+00:03:45,653 --> 00:03:48,233
+O corpo começa a recrutar as fibras
+
+96
+00:03:48,253 --> 00:03:51,543
+musculares de contração rápida.
+
+97
+00:03:51,787 --> 00:03:54,847
+Essas fibras precisam de mais ATP,
+
+98
+00:03:54,867 --> 00:03:58,377
+que é a molécula de energia da célula,
+
+99
+00:03:58,620 --> 00:04:00,640
+e a gordura simplesmente não consegue
+
+100
+00:04:00,660 --> 00:04:03,210
+entregar energia rápido o suficiente.
+
+101
+00:04:03,453 --> 00:04:07,100
+Então, existe uma queda progressiva na
+
+102
+00:04:07,120 --> 00:04:10,500
+utilização de gordura e um aumento no uso
+
+103
+00:04:10,520 --> 00:04:11,690
+de carboidratos.
+
+104
+00:04:11,953 --> 00:04:13,543
+Essa é a zona 3.
+
+105
+00:04:13,787 --> 00:04:17,007
+Uma zona de transição entre o predomínio
+
+106
+00:04:17,027 --> 00:04:20,707
+de gordura e o predomínio total de
+
+107
+00:04:20,727 --> 00:04:21,557
+carboidratos.
+
+108
+00:04:21,820 --> 00:04:24,000
+Então, a gente entra na zona 4,
+
+109
+00:04:24,253 --> 00:04:26,363
+que é o limiar de lactato.
+
+110
+00:04:26,620 --> 00:04:29,110
+Aqui a história muda completamente.
+
+111
+00:04:29,353 --> 00:04:31,333
+Na zona 4, a queima de gordura
+
+112
+00:04:31,353 --> 00:04:33,043
+praticamente desaparece.
+
+113
+00:04:33,287 --> 00:04:35,227
+O corpo passa a depender quase
+
+114
+00:04:35,247 --> 00:04:37,297
+exclusivamente de carboidrato,
+
+115
+00:04:37,527 --> 00:04:41,007
+porque essa é a única forma de gerar ATP
+
+116
+00:04:41,027 --> 00:04:44,037
+na velocidade que o esforço exige.
+
+117
+00:04:44,287 --> 00:04:46,887
+E é aqui que entra um conceito
+
+118
+00:04:46,907 --> 00:04:49,317
+fundamental, o lactato.
+
+119
+00:04:49,553 --> 00:04:52,373
+Muita gente ainda pensa que o lactato é um
+
+120
+00:04:52,393 --> 00:04:55,203
+vilão, que ele causa dor muscular,
+
+121
+00:04:55,453 --> 00:04:57,503
+que é o que queima o músculo.
+
+122
+00:04:57,753 --> 00:04:59,353
+Isso também é um mito.
+
+123
+00:04:59,373 --> 00:05:00,623
+O lactato é, na verdade,
+
+124
+00:05:00,693 --> 00:05:03,133
+um subproduto natural e obrigatório do uso
+
+125
+00:05:03,153 --> 00:05:04,063
+da glicose.
+
+126
+00:05:04,320 --> 00:05:06,340
+Ele sempre é produzido em qualquer
+
+127
+00:05:06,360 --> 00:05:07,250
+intensidade.
+
+128
+00:05:07,487 --> 00:05:10,947
+O que muda na zona 4 é a quantidade de
+
+129
+00:05:10,967 --> 00:05:12,217
+lactato.
+
+130
+00:05:12,453 --> 00:05:15,953
+Ela aumenta tanto que a mitocôndria das
+
+131
+00:05:15,973 --> 00:05:17,673
+fibras de contração lenta,
+
+132
+00:05:17,693 --> 00:05:19,953
+que é o local responsável por processar
+
+133
+00:05:19,973 --> 00:05:22,713
+esse lactato, começa a ficar
+
+134
+00:05:22,733 --> 00:05:23,863
+sobrecarregada.
+
+135
+00:05:24,120 --> 00:05:26,500
+Quando isso acontece, o lactato,
+
+136
+00:05:26,520 --> 00:05:29,530
+que não consegue ser processado,
+
+137
+00:05:29,787 --> 00:05:31,297
+escapa para a corrente sanguínea.
+
+138
+00:05:31,553 --> 00:05:34,553
+E é exatamente isso que a gente mede
+
+139
+00:05:34,573 --> 00:05:36,693
+quando faz aquele exame de teste de
+
+140
+00:05:36,713 --> 00:05:39,373
+lactato do dedo, em laboratório ou no
+
+141
+00:05:39,393 --> 00:05:39,903
+campo.
+
+142
+00:05:40,153 --> 00:05:42,513
+Essa intensidade também é conhecida como
+
+143
+00:05:42,533 --> 00:05:46,113
+limiar de lactato, ou máximo estado
+
+144
+00:05:46,133 --> 00:05:47,403
+estável de lactato.
+
+145
+00:05:47,653 --> 00:05:50,613
+É uma intensidade muito exigente que
+
+146
+00:05:50,633 --> 00:05:53,073
+normalmente você consegue sustentar por
+
+147
+00:05:53,093 --> 00:05:54,843
+15, 30 minutos.
+
+148
+00:05:55,087 --> 00:05:57,687
+A zona 5, a zona de VO₂ máximo,
+
+149
+00:05:57,707 --> 00:05:59,767
+se você continuar aumentando a
+
+150
+00:05:59,787 --> 00:06:02,867
+intensidade, chega um ponto onde
+
+151
+00:06:02,887 --> 00:06:06,407
+atinge a sua capacidade aeróbica máxima,
+
+152
+00:06:06,427 --> 00:06:08,017
+o famoso VO₂ máximo.
+
+153
+00:06:08,253 --> 00:06:11,783
+Aqui, a gordura já não participa mais,
+
+154
+00:06:12,020 --> 00:06:14,380
+é tudo carboidrato, com uma produção
+
+155
+00:06:14,400 --> 00:06:16,030
+enorme de lactato.
+
+156
+00:06:16,140 --> 00:06:18,480
+Essa intensidade só consegue ser
+
+157
+00:06:18,500 --> 00:06:20,670
+sustentada por poucos minutos,
+
+158
+00:06:20,920 --> 00:06:23,950
+geralmente dois a três minutos no máximo.
+
+159
+00:06:24,187 --> 00:06:27,227
+E a zona 6, o esforço
+
+160
+00:06:27,247 --> 00:06:28,677
+anaeróbico.
+
+161
+00:06:28,920 --> 00:06:30,560
+Por fim, a gente chega nessa zona,
+
+162
+00:06:30,580 --> 00:06:31,650
+a zona 6.
+
+163
+00:06:31,887 --> 00:06:33,947
+A última e a mais intensa.
+
+164
+00:06:33,967 --> 00:06:36,707
+Aqui, o corpo ultrapassa a capacidade
+
+165
+00:06:36,727 --> 00:06:38,087
+aeróbica máxima.
+
+166
+00:06:38,107 --> 00:06:40,717
+A demanda de ATP, de energia,
+
+167
+00:06:40,827 --> 00:06:44,307
+é tão grande e tão rápida que o músculo
+
+168
+00:06:44,327 --> 00:06:46,567
+nem consegue depender da glicose
+
+169
+00:06:46,587 --> 00:06:47,287
+circulante.
+
+170
+00:06:47,307 --> 00:06:50,707
+Ele usa o ATP que já está armazenado
+
+171
+00:06:50,727 --> 00:06:52,617
+dentro do próprio músculo.
+
+172
+00:06:52,853 --> 00:06:55,213
+É por isso que essa zona não depende de
+
+173
+00:06:55,233 --> 00:06:56,023
+oxigênio.
+
+174
+00:06:56,287 --> 00:06:58,907
+É o que acontece quando você faz um sprint
+
+175
+00:06:58,927 --> 00:07:02,087
+máximo, um esforço de 20 a 30
+
+176
+00:07:02,107 --> 00:07:05,737
+segundos no limite absoluto.
+
+177
+00:07:05,987 --> 00:07:08,857
+Então, qual zona é a mais importante?
+
+178
+00:07:09,120 --> 00:07:12,180
+Agora vem a parte que eu mais quero que
+
+179
+00:07:12,200 --> 00:07:13,010
+você entenda.
+
+180
+00:07:13,253 --> 00:07:15,333
+Existe uma ideia muito popular hoje em
+
+181
+00:07:15,353 --> 00:07:18,313
+dia, de que só treinar em zona 2 resolve
+
+182
+00:07:18,333 --> 00:07:18,963
+tudo.
+
+183
+00:07:19,220 --> 00:07:22,530
+Isso é uma meia verdade muito perigosa.
+
+184
+00:07:22,787 --> 00:07:26,453
+Sim, a zona 2 melhora muito a
+
+185
+00:07:26,473 --> 00:07:27,963
+sua função mitocondrial,
+
+186
+00:07:28,220 --> 00:07:31,340
+a sua capacidade limpar lactato e a sua
+
+187
+00:07:31,360 --> 00:07:32,850
+eficiência em usar gordura.
+
+188
+00:07:33,087 --> 00:07:35,480
+Isso é comprovado em laboratório com teste
+
+189
+00:07:35,500 --> 00:07:38,330
+de oxidação de gordura e capacidade
+
+190
+00:07:38,600 --> 00:07:41,610
+limpeza, de clearance de lactato.
+
+191
+00:07:41,853 --> 00:07:45,643
+Mas, se você treinar só em zona 2,
+
+192
+00:07:45,733 --> 00:07:47,403
+você constrói a base,
+
+193
+00:07:47,653 --> 00:07:49,783
+mas perde o que a gente chama de turbo.
+
+194
+00:07:50,020 --> 00:07:53,143
+É a zona 4, o treino de alta intensidade,
+
+195
+00:07:53,387 --> 00:07:54,547
+de limiar de lactato,
+
+196
+00:07:54,567 --> 00:07:57,077
+que constrói a sua capacidade acelerar,
+
+197
+00:07:57,320 --> 00:07:59,690
+de responder a um esforço decisivo,
+
+198
+00:07:59,840 --> 00:08:02,780
+de sustentar um pico de performance quando
+
+199
+00:08:02,800 --> 00:08:03,770
+isso é preciso.
+
+200
+00:08:04,020 --> 00:08:05,860
+Não é à toa que atletas de elite,
+
+201
+00:08:05,880 --> 00:08:09,200
+mesmo passando a maior parte do tempo
+
+202
+00:08:09,220 --> 00:08:12,560
+com volume de treino e intensidades
+
+203
+00:08:12,580 --> 00:08:15,093
+baixas, dedicam uma parte muito
+
+204
+00:08:15,113 --> 00:08:18,620
+significativa e muito exigente do seu
+
+205
+00:08:18,640 --> 00:08:20,747
+planejamento para treinos de alta
+
+206
+00:08:20,767 --> 00:08:21,657
+intensidade.
+
+207
+00:08:21,833 --> 00:08:24,193
+Sem isso, a capacidade acelerar
+
+208
+00:08:24,213 --> 00:08:26,433
+simplesmente não existe,
+
+209
+00:08:26,453 --> 00:08:28,023
+ela desaparece.
+
+210
+00:08:28,273 --> 00:08:29,833
+Então, deixa eu resumir aqui para você.
+
+211
+00:08:29,853 --> 00:08:33,533
+Cada zona de treino estimula
+
+212
+00:08:33,553 --> 00:08:36,633
+um sistema energético diferente e recruta
+
+213
+00:08:36,653 --> 00:08:38,763
+fibras musculares diferentes.
+
+214
+00:08:39,020 --> 00:08:41,200
+Não existe uma zona mágica que resolve
+
+215
+00:08:41,220 --> 00:08:42,470
+tudo sozinho.
+
+216
+00:08:42,720 --> 00:08:45,460
+O segredo está em entender o que cada
+
+217
+00:08:45,480 --> 00:08:48,440
+intensidade realmente provoca no seu corpo
+
+218
+00:08:48,460 --> 00:08:50,630
+e usar isso a seu favor,
+
+219
+00:08:50,680 --> 00:08:53,000
+seja você um atleta buscando performance
+
+220
+00:08:53,020 --> 00:08:55,960
+ou alguém buscando mais saúde metabólica e
+
+221
+00:08:55,980 --> 00:08:56,850
+longevidade.
+
+222
+00:08:57,087 --> 00:08:59,587
+Se esse conteúdo te ajudou a entender
+
+223
+00:08:59,607 --> 00:09:02,187
+melhor o que acontece dentro do seu corpo
+
+224
+00:09:02,207 --> 00:09:04,777
+durante o treino, deixa o seu like,
+
+225
+00:09:05,020 --> 00:09:06,700
+comenta o que você quer que eu explique no
+
+226
+00:09:06,720 --> 00:09:09,060
+próximo vídeo e não se esquece de se
+
+227
+00:09:09,080 --> 00:09:11,310
+inscrever aqui no canal Cardioesporte.
+
+228
+00:09:11,553 --> 00:09:14,633
+Isso me ajuda a atingir novos horizontes,
+
+229
+00:09:14,653 --> 00:09:16,833
+a chegar em novas pessoas e eu acredito
+
+230
+00:09:16,853 --> 00:09:19,393
+que levar essa informação pode ajudar
+
+231
+00:09:19,413 --> 00:09:22,293
+a salvar vidas.
+
+232
+00:09:22,313 --> 00:09:23,733
+Até a próxima, pessoal.
+
+233
+00:09:23,753 --> 00:09:24,443
+Um abraço.
+
