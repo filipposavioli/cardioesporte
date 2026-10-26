@@ -1,5 +1,7 @@
 import type { SupabaseClient } from "@supabase/supabase-js";
+import { chaveLimite, LIMITES, type Limite } from "./limites";
 import { lerEnvioId, usuarioLogado, type Resposta } from "./rotas";
+import { criarClienteAdmin } from "./supabase/admin";
 
 /** O pedaço do cliente do Resend que usamos (o real ou um falso nos testes). */
 export type EnviadorEmail = {
@@ -13,10 +15,17 @@ export type DepsAviso = {
   supabase: SupabaseClient;
   /** `null` quando não há RESEND_API_KEY. */
   resend: EnviadorEmail | null;
+  /** Contador por usuário (`criarLimitador()` em produção). Lança se o banco falhar. */
+  limitador: { consumir(chave: string, limite: Limite): Promise<number | null> };
+  /** Marca o envio como avisado; `true` só para quem marcou primeiro (`criarMarcadorAviso()`). */
+  marcarAvisado: (envioId: string) => Promise<boolean>;
   medicoEmail?: string;
   remetente?: string;
   log?: (...args: unknown[]) => void;
 };
+
+/** Tamanho máximo da observação no aviso (o banco também recusa acima disso). */
+export const OBSERVACAO_MAX = 1000;
 
 const umaLinha = (s: string) => s.replace(/[\r\n\t]+/g, " ").replace(/\s{2,}/g, " ").trim();
 
@@ -29,7 +38,7 @@ export function montarAviso(nome: string, nArquivos: number, observacao: string 
     text: [
       `${quem} enviou ${qtd}.`,
       "",
-      `Observação: ${observacao?.trim() || "(nenhuma)"}`,
+      `Observação: ${observacao?.slice(0, OBSERVACAO_MAX).trim() || "(nenhuma)"}`,
       "",
       "Para ver os envios pendentes: npm run savicore -- envios --pendentes",
     ].join("\n"),
@@ -37,9 +46,29 @@ export function montarAviso(nome: string, nArquivos: number, observacao: string 
 }
 
 /**
+ * Marca `envios.avisado_em` só se ainda estiver vazio (service role: o paciente não altera a
+ * coluna). Devolve `true` para a única chamada que marcou; lança se o banco falhar.
+ */
+export function criarMarcadorAviso(db: SupabaseClient = criarClienteAdmin()) {
+  return async (envioId: string): Promise<boolean> => {
+    const { data, error } = await db
+      .from("envios")
+      .update({ avisado_em: new Date().toISOString() })
+      .eq("id", envioId)
+      .is("avisado_em", null)
+      .select("id");
+    if (error) throw new Error(`envios.avisado_em: ${error.message}`);
+    return (data ?? []).length === 1;
+  };
+}
+
+/**
  * `POST /api/envios/aviso {envio_id}`: confirma que o envio é do paciente logado e avisa o médico
- * por e-mail. Se o e-mail falhar (ou não estiver configurado), responde 200 mesmo assim: o envio
- * já está registrado e aparece em `savicore envios --pendentes`.
+ * por e-mail, no máximo uma vez por envio e até `LIMITES.aviso` por usuário (o Resend é o mesmo
+ * dos códigos de login: avisos sem limite podiam esgotar a cota e travar o login de todos).
+ * Se o e-mail falhar (ou não estiver configurado), responde 200 mesmo assim: o envio já está
+ * registrado e aparece em `savicore envios --pendentes`. Falha depois de marcar não desmarca
+ * (evita reenvios em laço); fica no log.
  */
 export async function processarAviso(deps: DepsAviso, corpo: unknown): Promise<Resposta> {
   const log = deps.log ?? console.error;
@@ -74,6 +103,19 @@ export async function processarAviso(deps: DepsAviso, corpo: unknown): Promise<R
   if (!deps.resend || !deps.medicoEmail || !deps.remetente) {
     log("aviso: e-mail não configurado (RESEND_API_KEY, MEDICO_EMAIL, AVISO_REMETENTE); aviso não enviado", envioId);
     return { status: 200, corpo: { ok: true, avisado: false } };
+  }
+
+  try {
+    if ((await deps.limitador.consumir(chaveLimite("aviso", usuario.id), LIMITES.aviso)) === null) {
+      log("aviso: limite por usuário atingido; aviso não enviado", envioId);
+      return { status: 429, corpo: { erro: "Muitos avisos. Tente mais tarde.", avisado: false } };
+    }
+    if (!(await deps.marcarAvisado(envioId))) {
+      return { status: 200, corpo: { ok: true, avisado: false } };
+    }
+  } catch (e) {
+    log("aviso: falha ao limitar/marcar o envio", envioId, e);
+    return { status: 500, corpo: { erro: "Falha ao registrar o aviso." } };
   }
 
   const arquivos = (envio.data.arquivos as string[] | null) ?? [];

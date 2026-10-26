@@ -1,5 +1,6 @@
 import { Resend } from "resend";
-import { processarAviso } from "@/lib/aviso";
+import { criarMarcadorAviso, processarAviso } from "@/lib/aviso";
+import { criarLimitador } from "@/lib/limites";
 import { responderJson } from "@/lib/rotas";
 import { criarClienteServidor } from "@/lib/supabase/server";
 
@@ -11,6 +12,8 @@ export async function POST(request: Request) {
       {
         supabase: await criarClienteServidor(),
         resend: chave ? new Resend(chave) : null,
+        limitador: criarLimitador(),
+        marcarAvisado: criarMarcadorAviso(),
         medicoEmail: process.env.MEDICO_EMAIL,
         remetente: process.env.AVISO_REMETENTE,
       },

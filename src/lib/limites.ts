@@ -2,7 +2,7 @@ import { createHash } from "node:crypto";
 import type { SupabaseClient } from "@supabase/supabase-js";
 import { criarClienteAdmin } from "@/lib/supabase/admin";
 
-/** Limites de login do app (decisão R11). Janelas em segundos. */
+/** Limites do app: login (decisão R11) e aviso ao médico. Janelas em segundos. */
 export const LIMITES = {
   /** Códigos errados por e-mail. */
   verificar: { limite: 5, janelaS: 15 * 60 },
@@ -10,6 +10,8 @@ export const LIMITES = {
   pedirEmail: { limite: 5, janelaS: 60 * 60 },
   /** Pedidos de código por IP do cliente. */
   pedirIp: { limite: 20, janelaS: 60 * 60 },
+  /** Avisos ao médico por usuário (o Resend é o mesmo dos códigos de login). */
+  aviso: { limite: 10, janelaS: 60 * 60 },
 } as const;
 
 export type Limite = { limite: number; janelaS: number };
