@@ -7,6 +7,7 @@ import {
   baixar,
   cadastrar,
   definirAtivo,
+  executar,
   incorporar,
   listarEnvios,
   publicar,
@@ -142,5 +143,13 @@ describe("definirAtivo", () => {
     expect((await admin().from("pacientes").select("ativo").eq("id", p.id).single()).data!.ativo).toBe(false);
     await definirAtivo({ email, ativo: true });
     expect((await admin().from("pacientes").select("ativo").eq("id", p.id).single()).data!.ativo).toBe(true);
+  });
+});
+
+describe("argumentos do script", () => {
+  it("erros de opção saem em português, seguidos do uso", async () => {
+    await expect(executar(["envios", "--xyz"])).rejects.toThrow(/Opção desconhecida: --xyz[\s\S]*Uso: npm run savicore/);
+    await expect(executar(["cadastrar", "--nome"])).rejects.toThrow(/A opção --nome precisa de um valor[\s\S]*Uso:/);
+    await expect(executar(["envios", "solto"])).rejects.toThrow(/Argumento inesperado: solto[\s\S]*Uso:/);
   });
 });

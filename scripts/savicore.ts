@@ -216,21 +216,43 @@ const USO = `Uso: npm run savicore -- <comando> [opções]
   desativar  --email <e-mail>
   reativar   --email <e-mail>`;
 
+/** `parseArgs` com as mensagens de erro em português, seguidas do uso. */
+function lerOpcoes(args: string[]) {
+  try {
+    return parseArgs({
+      args,
+      options: {
+        nome: { type: "string" },
+        email: { type: "string" },
+        nascimento: { type: "string" },
+        dados: { type: "string" },
+        envio: { type: "string" },
+        destino: { type: "string" },
+        pendentes: { type: "boolean" },
+      },
+      strict: true,
+    });
+  } catch (e) {
+    const codigo = (e as { code?: string }).code;
+    const msg = e instanceof Error ? e.message : String(e);
+    const opcao = msg.match(/'(-{1,2}[^' ]+)/)?.[1] ?? "";
+    const texto =
+      codigo === "ERR_PARSE_ARGS_UNKNOWN_OPTION"
+        ? `Opção desconhecida: ${opcao}`
+        : codigo === "ERR_PARSE_ARGS_INVALID_OPTION_VALUE"
+          ? msg.includes("does not take an argument")
+            ? `A opção ${opcao} não recebe valor`
+            : `A opção ${opcao} precisa de um valor`
+          : codigo === "ERR_PARSE_ARGS_UNEXPECTED_POSITIONAL"
+            ? `Argumento inesperado: ${msg.match(/'([^']*)'/)?.[1] ?? ""}`
+            : `Argumentos inválidos (${msg})`;
+    throw new Error(`${texto}\n\n${USO}`);
+  }
+}
+
 export async function executar(argv: string[]): Promise<void> {
   const [comando, ...resto] = argv;
-  const { values: v } = parseArgs({
-    args: resto,
-    options: {
-      nome: { type: "string" },
-      email: { type: "string" },
-      nascimento: { type: "string" },
-      dados: { type: "string" },
-      envio: { type: "string" },
-      destino: { type: "string" },
-      pendentes: { type: "boolean" },
-    },
-    strict: true,
-  });
+  const { values: v } = lerOpcoes(resto);
 
   switch (comando) {
     case "cadastrar": {

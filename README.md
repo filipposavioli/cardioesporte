@@ -13,8 +13,8 @@ Este guia tem duas partes: **implantação em produção** (feita uma vez) e **u
 ### 1.1 Criar o projeto no Supabase
 
 1. Crie uma conta em <https://supabase.com> e um projeto novo. Em **Region**, escolha **South America (São Paulo) — `sa-east-1`**.
-2. Guarde a senha do banco que você definir.
-3. No plano **Pro** (US$ 25/mês), necessário para uso clínico: backups diários e sem pausa por inatividade.
+2. Guarde a senha do banco num gerenciador de senhas.
+3. Assine o plano **Pro** (US$ 25/mês), necessário para uso clínico: backups diários e sem pausa por inatividade.
 4. No computador, na pasta do projeto, conecte e aplique o banco (tabelas, regras de acesso e a pasta privada de arquivos `envios`):
 
    ```bash
@@ -35,14 +35,17 @@ O `supabase db push` não aplica estas opções. Faça pelo painel, em **Authent
 3. **Emails → Templates → Magic Link**:
    - **Subject**: `Seu código de acesso savi.core`
    - **Message body**: cole o conteúdo de `supabase/templates/codigo.html`.
-4. **Sessions** (plano Pro): **Inactivity timeout = 30 dias** (`720h`), para o paciente não precisar pedir código toda semana.
-5. **Rate Limits**: confirme o limite de e-mails por hora (ao ligar o SMTP próprio, o padrão é baixo; use pelo menos 30/hora) e mantenha os limites de verificação de código.
-6. **Project Settings → API**: copie a **Project URL**, a chave **anon** e a chave **service_role** (usadas nos passos 1.4 e 1.6).
+4. **Sessions** (plano Pro): **Inactivity timeout = 30 dias (720 horas)** — use a unidade que o campo pedir —, para o paciente não precisar pedir código toda semana.
+5. **Rate Limits**: ajuste o limite de e-mails por hora ao plano do Resend (passo 1.3) e mantenha os limites de verificação de código. Códigos de login e avisos ao médico saem da mesma conta do Resend; se a cota acabar, **nenhum paciente consegue entrar** até ela renovar.
+   - Resend **Pro** (recomendado): **30 e-mails/hora**.
+   - Resend **gratuito** (100 e-mails/dia): no máximo **4 e-mails/hora** (4 × 24 = 96/dia), para pedidos de código em excesso não esgotarem a cota diária.
+6. **Project Settings → API** (ou **API Keys**): copie a **Project URL**, a chave **publishable** (ou **anon**, legada) e a chave **secret** (ou **service_role**, legada), usadas nos passos 1.4 e 1.6.
 
 ### 1.3 E-mail pelo Resend (SMTP e avisos)
 
 1. Crie conta em <https://resend.com>, em **Domains** adicione o domínio do consultório e publique os registros DNS (SPF/DKIM) que ele mostrar. Espere ficar **Verified**.
 2. Crie uma **API key** (guarde como `RESEND_API_KEY`).
+   - **Plano:** o gratuito permite **100 e-mails/dia e 3.000/mês**, e a cota é dividida entre os códigos de login e os avisos de novos exames. Para uso clínico, assine o **Pro** (US$ 20/mês, 50.000 e-mails/mês, sem limite diário; preços de outubro de 2026 — confira em <https://resend.com/pricing>). O portal limita os avisos a 1 por envio e 10 por paciente por hora.
 3. No Supabase, **Authentication → Emails → SMTP Settings → Enable Custom SMTP**:
    - Host `smtp.resend.com`, porta `465`, usuário `resend`, senha = a API key do Resend.
    - Remetente (Sender): um endereço do domínio verificado, por exemplo `Dr. Filippo <painel@seudominio.com.br>`.
@@ -56,8 +59,8 @@ O `supabase db push` não aplica estas opções. Faça pelo painel, em **Authent
    | Variável | Valor |
    |---|---|
    | `NEXT_PUBLIC_SUPABASE_URL` | Project URL do Supabase |
-   | `NEXT_PUBLIC_SUPABASE_ANON_KEY` | chave `anon` |
-   | `SUPABASE_SERVICE_ROLE_KEY` | chave `service_role` |
+   | `NEXT_PUBLIC_SUPABASE_ANON_KEY` | chave publishable (ou `anon`, legada) |
+   | `SUPABASE_SERVICE_ROLE_KEY` | chave secret (ou `service_role`, legada) |
    | `RESEND_API_KEY` | API key do Resend |
    | `MEDICO_EMAIL` | e-mail que recebe os avisos de novos exames |
    | `AVISO_REMETENTE` | remetente do aviso, no domínio verificado (ex.: `Portal savi.core <painel@seudominio.com.br>`) |
@@ -68,7 +71,7 @@ O `supabase db push` não aplica estas opções. Faça pelo painel, em **Authent
 
 ### 1.5 Teste de ponta a ponta
 
-1. Cadastre-se como paciente de teste (passo 2.1), abra o endereço do portal, peça o código e entre.
+1. Cadastre um paciente de teste (pode ser você, com outro e-mail) pelo passo 2.1, abra o endereço do portal, peça o código e entre.
 2. Confira que o e-mail chegou com o assunto "Seu código de acesso savi.core" e que um e-mail não cadastrado recebe a mesma mensagem neutra, mas nenhum código.
 3. Publique um painel (2.2), envie um exame pelo portal e veja o aviso chegar em `MEDICO_EMAIL`.
 4. No celular, abra o portal e use **Adicionar à tela inicial**.
@@ -79,8 +82,8 @@ O script `savicore` conecta no banco usando as variáveis de ambiente. Para apon
 
 ```
 NEXT_PUBLIC_SUPABASE_URL=<Project URL de produção>
-NEXT_PUBLIC_SUPABASE_ANON_KEY=<chave anon de produção>
-SUPABASE_SERVICE_ROLE_KEY=<chave service_role de produção>
+NEXT_PUBLIC_SUPABASE_ANON_KEY=<chave publishable (ou anon, legada) de produção>
+SUPABASE_SERVICE_ROLE_KEY=<chave secret (ou service_role, legada) de produção>
 ```
 
 O `.env.local` já está no `.gitignore`: **nunca o envie ao GitHub nem o compartilhe**; ele contém a chave de acesso total. Para voltar ao ambiente local de desenvolvimento, troque os valores de volta (ou renomeie o arquivo).
@@ -141,9 +144,9 @@ Fluxo típico de um exame novo: o paciente envia pelo portal → aviso por e-mai
 |---|---|---|
 | Supabase | Pro | US$ 25/mês |
 | Vercel | Pro | US$ 20/mês |
-| Resend | gratuito cobre o volume esperado | US$ 0 |
+| Resend | Pro (recomendado; 50.000 e-mails/mês) | US$ 20/mês |
 
-Total aproximado: **US$ 45/mês** (mais o registro do domínio).
+Total aproximado: **US$ 65/mês** (mais o registro do domínio). Com o Resend gratuito (100 e-mails/dia, 3.000/mês), cai para US$ 45/mês, mas aí o limite de e-mails do Supabase deve ficar em 4/hora (passo 1.2, item 5) e um excesso de pedidos de código pode deixar os pacientes sem login até o dia seguinte.
 
 ---
 
