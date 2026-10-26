@@ -6,8 +6,11 @@ import { Wordmark } from "@/components/marca/Wordmark";
 
 type Props = {
   mensagem: string;
-  /** "vazio": sem painel publicado (botão Enviar exame); "erro": falha ao carregar (botão Tentar de novo). */
-  tipo: "vazio" | "erro";
+  /**
+   * "vazio": sem painel publicado (botão Enviar exame); "erro": falha ao carregar (botão Tentar de novo);
+   * "desativado": acesso desativado pelo consultório (só o Sair).
+   */
+  tipo: "vazio" | "erro" | "desativado";
   acaoSair?: (fd: FormData) => void | Promise<void>;
 };
 
@@ -35,19 +38,21 @@ export function Aviso({ mensagem, tipo, acaoSair }: Props) {
           </span>
         </div>
         <p className="sc-aviso-t">{mensagem}</p>
-        <div className="sc-aviso-a">
-          {tipo === "vazio" ? (
-            <Link className="sc-btn" href="/enviar">
-              Enviar exame
-            </Link>
-          ) : (
-            // Recarga completa de propósito: refaz a busca do painel no servidor.
-            // eslint-disable-next-line @next/next/no-html-link-for-pages
-            <a className="sc-btn" href="/">
-              Tentar de novo
-            </a>
-          )}
-        </div>
+        {tipo !== "desativado" && (
+          <div className="sc-aviso-a">
+            {tipo === "vazio" ? (
+              <Link className="sc-btn" href="/enviar">
+                Enviar exame
+              </Link>
+            ) : (
+              // Recarga completa de propósito: refaz a busca do painel no servidor.
+              // eslint-disable-next-line @next/next/no-html-link-for-pages
+              <a className="sc-btn" href="/">
+                Tentar de novo
+              </a>
+            )}
+          </div>
+        )}
       </section>
     </div>
   );

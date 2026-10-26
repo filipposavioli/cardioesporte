@@ -12,7 +12,8 @@ export default defineConfig({
   projects: [{ name: "chromium", use: { ...devices["Desktop Chrome"] } }],
   webServer: {
     command: "npm run dev",
-    url: "http://localhost:3000",
+    // "/" redireciona (307 → /entrar); /entrar responde 200 com ou sem sessão.
+    url: "http://localhost:3000/entrar",
     reuseExistingServer: true,
     timeout: 120000,
   },

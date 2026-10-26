@@ -2,7 +2,7 @@ import path from "node:path";
 import { notFound } from "next/navigation";
 import { Painel } from "@/components/painel/Painel";
 import { validarPasta } from "@/lib/dados";
-import { sair } from "../../acoes";
+import { sair } from "../../entrar/actions";
 
 // Só em desenvolvimento: renderiza a fixture fictícia para conferência visual.
 export default function DevPainel() {
