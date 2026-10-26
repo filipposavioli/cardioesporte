@@ -14,6 +14,8 @@ function protegida(caminho: string): boolean {
  */
 export async function proxy(request: NextRequest) {
   let resposta = NextResponse.next({ request });
+  // Cabeçalhos que o @supabase/ssr pede junto com cookies de sessão (Cache-Control: no-store etc.).
+  let cabecalhosSessao: Record<string, string> = {};
 
   const supabase = createServerClient(
     process.env.NEXT_PUBLIC_SUPABASE_URL!,
@@ -25,7 +27,8 @@ export async function proxy(request: NextRequest) {
           lista.forEach(({ name, value }) => request.cookies.set(name, value));
           resposta = NextResponse.next({ request });
           lista.forEach(({ name, value, options }) => resposta.cookies.set(name, value, options));
-          Object.entries(cabecalhos ?? {}).forEach(([k, v]) => resposta.headers.set(k, v));
+          cabecalhosSessao = { ...cabecalhosSessao, ...(cabecalhos ?? {}) };
+          Object.entries(cabecalhosSessao).forEach(([k, v]) => resposta.headers.set(k, v));
         },
       },
     },
@@ -47,6 +50,7 @@ export async function proxy(request: NextRequest) {
     const redirecionar = NextResponse.redirect(url);
     // Leva junto os cookies renovados (ou apagados) pelo getUser().
     resposta.cookies.getAll().forEach((c) => redirecionar.cookies.set(c));
+    Object.entries(cabecalhosSessao).forEach(([k, v]) => redirecionar.headers.set(k, v));
     return redirecionar;
   }
   return resposta;

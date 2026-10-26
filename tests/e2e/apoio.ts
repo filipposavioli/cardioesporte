@@ -1,6 +1,7 @@
 import { execFileSync } from "node:child_process";
 import { randomUUID } from "node:crypto";
 import { expect, type Page } from "@playwright/test";
+import { admin } from "../db/helpers";
 
 const MAILPIT = "http://127.0.0.1:54324";
 export const FIXTURE = "tests/fixtures/exemplo";
@@ -70,4 +71,13 @@ export async function entrar(page: Page, email: string): Promise<void> {
   await page.getByLabel("Código de 6 dígitos").fill(codigo);
   await page.getByRole("button", { name: "Entrar" }).click();
   await expect(page).toHaveURL("/");
+}
+
+/**
+ * Zera os limites de login (tabela limites_login). Sem proxy na frente, todas as requisições
+ * dos testes caem no mesmo balde de IP (20 pedidos/hora), que várias rodadas esgotariam.
+ */
+export async function limparLimites(): Promise<void> {
+  const { error } = await admin().from("limites_login").delete().gte("id", 0);
+  if (error) throw error;
 }

@@ -1,17 +1,31 @@
 import { randomUUID } from "node:crypto";
 import { expect, test } from "@playwright/test";
-import { desativar, entrar, lerEmailDoCodigo, mensagensPara, novoPaciente, pedirCodigo } from "./apoio";
+import {
+  desativar,
+  entrar,
+  lerEmailDoCodigo,
+  limparLimites,
+  mensagensPara,
+  novoPaciente,
+  pedirCodigo,
+} from "./apoio";
 
 const NEUTRA = "Se este e-mail estiver cadastrado, você receberá um código.";
 const ERRO_CODIGO = "Código incorreto ou vencido. Peça um novo.";
+const MUITAS = "Muitas tentativas. Aguarde alguns minutos e tente de novo.";
 const DESATIVADO = "Seu acesso ao painel está desativado. Fale com o consultório do Dr. Filippo.";
+
+test.beforeAll(limparLimites);
 
 test("e-mail não cadastrado mostra mensagem neutra", async ({ page }) => {
   const email = `ninguem-${randomUUID()}@example.com`;
   await page.goto("/entrar");
   await page.getByLabel("Seu e-mail").fill(email);
+  const inicio = Date.now();
   await page.getByRole("button", { name: "Receber código" }).click();
   await expect(page.getByText(NEUTRA)).toBeVisible();
+  // Piso de 2 s: não cadastrado não responde mais rápido que cadastrado (R12).
+  expect(Date.now() - inicio).toBeGreaterThanOrEqual(1900);
   // Mesma tela de quem está cadastrado: não revela se o e-mail existe.
   const campo = page.getByLabel("Código de 6 dígitos");
   await expect(campo).toBeVisible();
@@ -106,4 +120,21 @@ test("/dev/painel abre sem sessão em desenvolvimento", async ({ page }) => {
   await page.goto("/dev/painel");
   await expect(page).toHaveURL("/dev/painel");
   await expect(page.getByRole("heading", { level: 1, name: "Paciente Exemplo" })).toBeVisible();
+});
+
+test("6ª tentativa errada bloqueia mesmo com código certo", async ({ page }) => {
+  const email = novoPaciente({ publicar: true });
+  const codigo = await pedirCodigo(page, email);
+  const errado = String((Number(codigo) + 1) % 1_000_000).padStart(6, "0");
+  const campo = page.getByLabel("Código de 6 dígitos");
+  for (let i = 0; i < 5; i++) {
+    await campo.fill(errado);
+    await page.getByRole("button", { name: "Entrar" }).click();
+    await expect(page.getByRole("alert").filter({ hasText: ERRO_CODIGO })).toBeVisible();
+  }
+  await campo.fill(codigo);
+  await page.getByRole("button", { name: "Entrar" }).click();
+  await expect(page.getByRole("alert").filter({ hasText: MUITAS })).toHaveText(MUITAS);
+  await page.goto("/");
+  await expect(page).toHaveURL("/entrar");
 });
