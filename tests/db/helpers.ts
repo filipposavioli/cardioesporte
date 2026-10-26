@@ -2,6 +2,7 @@ import { execSync } from "node:child_process";
 import { randomUUID } from "node:crypto";
 import { existsSync } from "node:fs";
 import { createClient, type SupabaseClient } from "@supabase/supabase-js";
+import { criarClienteAdmin } from "../../src/lib/supabase/admin";
 
 type Ambiente = { url: string; anonKey: string; serviceKey: string };
 
@@ -34,7 +35,16 @@ function carregarAmbiente(): Ambiente {
     throw new Error("Supabase local não encontrado: rode `npx supabase start`.");
   }
   ambiente = { url, anonKey, serviceKey };
+  // Para código que lê o ambiente (src/lib/supabase/admin.ts, scripts/savicore.ts).
+  process.env.NEXT_PUBLIC_SUPABASE_URL = url;
+  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY = anonKey;
+  process.env.SUPABASE_SERVICE_ROLE_KEY = serviceKey;
   return ambiente;
+}
+
+/** Garante as variáveis de ambiente do Supabase local em process.env. */
+export function prepararAmbiente(): void {
+  carregarAmbiente();
 }
 
 const semSessao = {
@@ -45,8 +55,8 @@ let clienteAdmin: SupabaseClient | undefined;
 
 /** Cliente com service role (ignora RLS). Só para testes. */
 export function admin(): SupabaseClient {
-  const { url, serviceKey } = carregarAmbiente();
-  clienteAdmin ??= createClient(url, serviceKey, semSessao);
+  carregarAmbiente();
+  clienteAdmin ??= criarClienteAdmin();
   return clienteAdmin;
 }
 

@@ -360,3 +360,60 @@ describe("RLS do portal", () => {
     expect(rpc.data ?? null).toBeNull();
   });
 });
+
+describe("endurecimento (0002)", () => {
+  it("e-mail de paciente precisa estar normalizado", async () => {
+    const email = `Maius-${randomUUID()}@Example.com`;
+    const maiusculo = await admin().from("pacientes").insert({ nome: "X", email });
+    expect(maiusculo.error).not.toBeNull();
+    const espaco = await admin().from("pacientes").insert({ nome: "X", email: ` ${email.toLowerCase()} ` });
+    expect(espaco.error).not.toBeNull();
+    const ok = await admin().from("pacientes").insert({ nome: "X", email: email.toLowerCase() });
+    expect(ok.error).toBeNull();
+  });
+
+  it("envio recusa elemento NULL e segmento . ou ..", async () => {
+    const { a } = await cenario();
+    const id = randomUUID();
+    const base = `${a.pacienteId}/${id}`;
+    const casos: (string | null)[][] = [
+      [null],
+      [`${base}/x.pdf`, null],
+      [`${base}/..`],
+      [`${base}/.`],
+      [`${base}/../x.pdf`],
+      [`${base}/sub/x.pdf`],
+      [`${base}/`],
+    ];
+    for (const arquivos of casos) {
+      const r = await a.client.from("envios").insert({ id, paciente_id: a.pacienteId, arquivos });
+      expect(r.error, JSON.stringify(arquivos)).not.toBeNull();
+    }
+    const ok = await a.client
+      .from("envios")
+      .insert({ id, paciente_id: a.pacienteId, arquivos: [`${base}/x.pdf`] });
+    expect(ok.error).toBeNull();
+  });
+
+  it("upload com 1 nível de pasta é recusado", async () => {
+    const { a } = await cenario();
+    const r = await a.client.storage
+      .from("envios")
+      .upload(`${a.pacienteId}/x.pdf`, pdf(), { contentType: "application/pdf" });
+    expect(r.error).toMatchObject({ statusCode: "403" });
+  });
+
+  it("listar a raiz ou a pasta de outro paciente não devolve nada de B", async () => {
+    const { a, b } = await cenario();
+    const caminhoB = `${b.pacienteId}/${randomUUID()}/x.pdf`;
+    expect(
+      (await b.client.storage.from("envios").upload(caminhoB, pdf(), { contentType: "application/pdf" }))
+        .error,
+    ).toBeNull();
+
+    const raiz = await a.client.storage.from("envios").list("");
+    expect((raiz.data ?? []).map((o) => o.name)).not.toContain(b.pacienteId);
+    const pastaB = await a.client.storage.from("envios").list(b.pacienteId);
+    expect(pastaB.data ?? []).toHaveLength(0);
+  });
+});
