@@ -93,6 +93,9 @@ describe("temMotor", () => {
   it("false sem zonas, VO₂ e pct_predito", () => {
     expect(temMotor(base)).toBe(false);
   });
+  it("zonas vazias contam como sem zonas", () => {
+    expect(temMotor({ ...base, zonas: [] })).toBe(false);
+  });
   it("true com zonas, VO₂ máximo ou pct_predito", () => {
     expect(temMotor({ ...base, zonas: [{ zona: "Z1", de: null, ate: 1, vel: "", uso: "" }] })).toBe(true);
     expect(temMotor({ ...base, marcadores: [mk({ exame: "VO₂ máximo" })] })).toBe(true);

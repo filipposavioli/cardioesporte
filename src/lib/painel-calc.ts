@@ -69,7 +69,7 @@ export function tendencia(pontos: PontoEvolucao[]): {
 
 export function temMotor(p: Painel): boolean {
   return (
-    p.zonas != null ||
+    (p.zonas?.length ?? 0) > 0 ||
     p.marcadores.some((m) => m.exame === "VO₂ máximo" || m.pct_predito != null)
   );
 }
