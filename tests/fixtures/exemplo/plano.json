@@ -1,0 +1,27 @@
+[
+  {
+    "n": 1,
+    "foco": "Colesterol LDL",
+    "acao": "Conversar com o Dr. Filippo sobre como baixar o LDL e repetir o exame em 3 meses."
+  },
+  {
+    "n": 2,
+    "foco": "Cálcio coronário",
+    "acao": "Manter o acompanhamento do escore de cálcio e revisar o risco a cada consulta."
+  },
+  {
+    "n": 3,
+    "foco": "Ferro e vitamina D",
+    "acao": "Revisar a alimentação e discutir a reposição com o médico antes de começar qualquer suplemento."
+  },
+  {
+    "n": 4,
+    "foco": "Treino",
+    "acao": "Distribuir os treinos pelas zonas de frequência cardíaca, com mais tempo na zona Moderada."
+  },
+  {
+    "n": 5,
+    "foco": "Próximos exames",
+    "acao": "Repetir o perfil de lipídios, a proteína C reativa e a ferritina na próxima coleta."
+  }
+]

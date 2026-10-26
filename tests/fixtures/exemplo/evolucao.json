@@ -1,0 +1,82 @@
+[
+  {
+    "marcador": "LDL-colesterol",
+    "unidade": "mg/dL",
+    "ref": "< 100",
+    "data": "2024-04-10",
+    "valor": 152,
+    "melhor": "menor"
+  },
+  {
+    "marcador": "LDL-colesterol",
+    "unidade": "mg/dL",
+    "ref": "< 100",
+    "data": "2025-03-18",
+    "valor": 146,
+    "melhor": "menor"
+  },
+  {
+    "marcador": "LDL-colesterol",
+    "unidade": "mg/dL",
+    "ref": "< 100",
+    "data": "2025-10-02",
+    "valor": 131,
+    "melhor": "menor"
+  },
+  {
+    "marcador": "LDL-colesterol",
+    "unidade": "mg/dL",
+    "ref": "< 100",
+    "data": "2026-10-05",
+    "valor": 138,
+    "melhor": "menor"
+  },
+  {
+    "marcador": "HDL-colesterol",
+    "unidade": "mg/dL",
+    "ref": "> 60",
+    "data": "2025-03-18",
+    "valor": 49,
+    "melhor": "maior"
+  },
+  {
+    "marcador": "HDL-colesterol",
+    "unidade": "mg/dL",
+    "ref": "> 60",
+    "data": "2025-10-02",
+    "valor": 54,
+    "melhor": "maior"
+  },
+  {
+    "marcador": "HDL-colesterol",
+    "unidade": "mg/dL",
+    "ref": "> 60",
+    "data": "2026-10-05",
+    "valor": 58,
+    "melhor": "maior"
+  },
+  {
+    "marcador": "Ferritina",
+    "unidade": "ng/mL",
+    "ref": "50–200",
+    "data": "2025-03-18",
+    "valor": 71,
+    "melhor": "faixa"
+  },
+  {
+    "marcador": "Ferritina",
+    "unidade": "ng/mL",
+    "ref": "50–200",
+    "data": "2025-10-02",
+    "valor": 52,
+    "melhor": "faixa"
+  },
+  {
+    "marcador": "Ferritina",
+    "unidade": "ng/mL",
+    "ref": "50–200",
+    "data": "2026-10-05",
+    "valor": 38,
+    "melhor": "faixa"
+  }
+]

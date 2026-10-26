@@ -1,0 +1,23 @@
+[
+  {
+    "zona": "Leve",
+    "de": null,
+    "ate": 128,
+    "vel": "6,5 a 8,0 km/h",
+    "uso": "Aquecimento, recuperação e dias de descanso ativo."
+  },
+  {
+    "zona": "Moderada",
+    "de": 128,
+    "ate": 152,
+    "vel": "8,0 a 10,5 km/h",
+    "uso": "Base do treino: construir resistência com conforto."
+  },
+  {
+    "zona": "Intensa",
+    "de": 152,
+    "ate": 174,
+    "vel": "10,5 a 13,0 km/h",
+    "uso": "Treinos curtos e intervalados, uma a duas vezes por semana."
+  }
+]
