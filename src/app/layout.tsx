@@ -4,6 +4,7 @@ import "./globals.css";
 export const metadata: Metadata = {
   title: "Painel de saúde · savi.core",
   description: "Seus exames, sua saúde e próximos passos, com o Dr. Filippo Savioli.",
+  icons: { apple: "/icons/apple-touch-icon.png" },
 };
 
 export const viewport: Viewport = {

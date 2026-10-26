@@ -10,10 +10,22 @@ export const FIXTURE = "tests/fixtures/exemplo";
  * Roda o CLI de publicação como o médico rodaria. (Importar scripts/savicore.ts direto não
  * funciona aqui: o Playwright transpila para CJS e o script usa import.meta.)
  */
-function savicore(...args: string[]): void {
-  execFileSync("npx", ["tsx", "scripts/savicore.ts", ...args], {
+function savicore(...args: string[]): string {
+  return execFileSync("npx", ["tsx", "scripts/savicore.ts", ...args], {
     stdio: "pipe",
+    encoding: "utf8",
   });
+}
+
+/** Linhas de `savicore envios --pendentes` (uma por envio pendente). */
+export function enviosPendentes(): string[] {
+  return savicore("envios", "--pendentes")
+    .split("\n")
+    .filter((l) => /^[0-9a-f-]{36}\s/.test(l));
+}
+
+export function incorporarEnvio(id: string): void {
+  savicore("incorporar", "--envio", id);
 }
 
 /** Cadastra um paciente fictício (e-mail único) pelo script; opcionalmente publica a fixture. */
